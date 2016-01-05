@@ -5,8 +5,8 @@ class CreateCreditCards < ActiveRecord::Migration
       t.integer :cvv
       t.integer :expiration_month
       t.integer :expiration_year
-      t.title :firstname
-      t.title :lastname
+      t.string :firstname
+      t.string :lastname
 
       t.timestamps null: false
     end
