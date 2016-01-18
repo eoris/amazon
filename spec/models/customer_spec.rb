@@ -15,6 +15,9 @@ RSpec.describe Customer, type: :model do
   it { is_expected.to have_many(:orders) }
   it { is_expected.to have_many(:ratings) }
 
-  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  describe "validates uniqueness of an email" do
+    subject { FactoryGirl.build(:customer) }
+    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  end
 
 end
