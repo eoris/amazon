@@ -6,6 +6,7 @@
 #
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: 5
   timeout: 5000
   host: localhost
@@ -15,7 +16,6 @@ default: &default
 
 development:
   <<: *default
-  encoding: unicode
   database: amazon_development
 
 # Warning: The database defined as "test" will be erased and

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :country do
-    name ""
+    name { Faker::Address.country }
   end
 
 end
