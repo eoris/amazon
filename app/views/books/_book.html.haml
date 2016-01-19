@@ -1,18 +1,27 @@
-.container-fluid
+.container
   .row
-    .col-lg-4
-    .col-lg-4
-      .media
-        %h4.media-heading= @book.title
-        .media-left.media-middle
-          =image_tag('no_img.png', class: "img-rounded")
-        .media-body
-          %p{:align => "justify"}= @book.description
-
-        %h4.form.form-inline.text-center
+    .col-md-3
+    .col-md-6
+      .col-sm-12
+        .visible-xs-block.text-center
+          %h4= @book.title
+        .hidden-xs
+          %h4= @book.title
+      .col-sm-3.col-md-3
+        =image_tag('no_img.png', class: "img-responsive center-block")
+      .col-sm-9.col-md-9
+        %p{:align => "justify"}= @book.description
+      .col-sm-12
+        %h4.form-inline.pull-right
           = number_to_currency @book.price
           %input.form-control
           %button.btn.btn-primary{:type => "submit"} ADD TO CART
-    .col-lg-4
-
-
+      %h4.col-sm-12
+    .col-md-3
+.container
+  .row
+    .col-sm-4
+    .col-sm-4
+      %h4.text-center
+        Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anyware!
+    .col-sm-4
