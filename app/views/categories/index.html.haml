@@ -1,0 +1,12 @@
+!!!
+%html
+  %body
+    .container
+      .autopagerize_page_element
+        - @books.each do |book|
+          .col-md-4
+            %h4= book.title
+            =image_tag('no_img.png', class: "img-responsive center-block")
+            %h4= number_to_currency book.price
+    = paginate @books
+    = page_entries_info @books

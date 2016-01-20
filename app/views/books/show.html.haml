@@ -8,10 +8,14 @@
         .col-sm-12
           .visible-xs-block.text-center
             %h4= @book.title
-            %h5= "#{t('books.by')} #{authors_fullname}"
+            %h5
+              = t('books.by')
+              = authors_link
           .hidden-xs
             %h4= @book.title
-            %h5= "#{t('books.by')} #{authors_fullname}"
+            %h5
+              = t('books.by')
+              = authors_link
         .col-sm-3.col-md-3
           =image_tag('no_img.png', class: "img-responsive center-block")
         .col-sm-9.col-md-9
@@ -20,13 +24,6 @@
           %h4.form-inline.pull-right
             = number_to_currency @book.price
             %input.form-control{:type => "text", :value => "1"}
-            %button.btn.btn-primary{:type => "submit"}= t('add_to_cart')
+            %button.btn.btn-primary{:type => "submit"}= t('books.add_to_cart')
         %h4.col-sm-12
       .col-md-3
-  .container
-    .row
-      .col-sm-4
-      .col-sm-4
-        %h4.text-center
-          = t('books.welcome')
-      .col-sm-4
