@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  books:
+    welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anyware!"
+    add_to_cart: "ADD TO CART"
+    by: "by"
+  header:
+    home: "HOME"
+    shop: "SHOP"
+    settings: "Settings"
+    orders: "Orders"
