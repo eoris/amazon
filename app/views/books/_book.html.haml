@@ -19,7 +19,7 @@
         .col-sm-12
           %h4.form-inline.pull-right
             = number_to_currency @book.price
-            %input.form-control
+            %input.form-control{:type => "text", :value => "1"}
             %button.btn.btn-primary{:type => "submit"}= t('add_to_cart')
         %h4.col-sm-12
       .col-md-3
