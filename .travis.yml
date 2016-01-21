@@ -9,5 +9,6 @@ services:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - "rake db:drop RAILS_ENV=test"
+  - "rake db:create RAILS_ENV=test"
   - "rake db:migrate"
-  - "rake db:setup RAILS_ENV=test"
+  - "rake db:seed"
