@@ -1,20 +1,21 @@
 %nav.navbar
   .container
-    .navbar-header
-      %button.navbar-toggle.collapsed{"aria-expanded" => "false","data-target" => ".collapse.navbar-collapse", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.glyphicon.glyphicon-menu-hamburger
-      %a.navbar-brand{:href => "/"} The Bookstore
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %li
-          %a{:href => "/"}= t('header.home')
-        %li
-          %a{:href => "/categories"}= t('header.shop')
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{:href => "#"}= t('header.settings')
-        %li
-          %a{:href => "#"}= t('header.orders')
-        %li
-          %a{:href => "#"} Sign In
+    .row
+      .navbar-header
+        %button.navbar-toggle.collapsed{"aria-expanded" => "false","data-target" => ".collapse.navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.glyphicon.glyphicon-menu-hamburger
+        %a.navbar-brand{:href => "/"} The Bookstore
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => "/"}= t('header.home')
+          %li
+            %a{:href => "/categories"}= t('header.shop')
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{:href => "#"}= t('header.settings')
+          %li
+            %a{:href => "#"}= t('header.orders')
+          %li
+            %a{:href => "#"} Sign In
