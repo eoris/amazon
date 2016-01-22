@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'books#index'
+  root 'books#bestsellers'
   resources :books, only: [:index, :show]
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]

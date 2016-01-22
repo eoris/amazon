@@ -10,12 +10,14 @@
             %h4= @book.title
             %h5
               = t('books.by')
-              = authors_link
+              - @book.authors.map do |n|
+                = link_to "#{n.firstname} #{n.lastname}", n
           .hidden-xs
             %h4= @book.title
             %h5
               = t('books.by')
-              = authors_link
+              - @book.authors.map do |n|
+                = link_to "#{n.firstname} #{n.lastname}", n
         .col-sm-3.col-md-3
           =image_tag('no_img.png', class: "img-responsive center-block")
         .col-sm-9.col-md-9
