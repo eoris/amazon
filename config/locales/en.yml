@@ -29,6 +29,7 @@ en:
     shop: "SHOP"
     settings: "Settings"
     orders: "Orders"
+    sign_in: "Sign In"
   categories:
     shop_by_categories: "SHOP BY CATEGORIES"
     shop: "Shop"
