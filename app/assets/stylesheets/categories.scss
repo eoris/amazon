@@ -1,0 +1,15 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.col-md-4 {
+  /*height: 300px*/
+}
+
+.item {
+  height: 50px;
+  overflow: hidden;
+}
+
+.thumbnail:hover {
+  background: #F5F5F5;
+}
