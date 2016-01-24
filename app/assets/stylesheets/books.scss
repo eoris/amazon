@@ -4,9 +4,28 @@
 
 .form-inline .form-control {
   width: 50px;
+  display: inline;
 }
 
-.form-control {
-  width: 50px;
-  display: inline;
+.item.active {
+  height: unset;
+}
+
+#bestseller-description {
+  height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carousel-control {
+  top: 50px;
+  color: #E6E6E6;
+}
+
+.left.carousel-control {
+  background-image: none;
+}
+
+.right.carousel-control {
+  background-image: none;
 }

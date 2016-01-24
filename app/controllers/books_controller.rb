@@ -9,6 +9,6 @@ class BooksController < ApplicationController
   end
 
   def bestsellers
-    @books = Book.page(params[:page]).per(1)
+    @books = Book.page(params[:page]).per(9)
   end
 end
