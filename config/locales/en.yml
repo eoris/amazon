@@ -34,8 +34,11 @@ en:
     orders: "Orders"
     sign_in: "Sign In"
   categories:
+    categories: 'Categories'
     shop_by_categories: "SHOP BY CATEGORIES"
-    all_books: "All books"
+    category: 'Category'
+    all_categories: "ALL CATEGORIES"
+    all_books: "ALL BOOKS"
     home: "Home"
     shop: "Shop"
 

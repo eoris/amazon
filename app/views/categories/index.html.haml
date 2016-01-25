@@ -1,21 +1,6 @@
 .container
   .row
     .autopagerize_page_element
-      .col-md-10
-        %h3= t('categories.shop')
-        .row
-          - @books.each do |book|
-            .col-sm-6.col-md-4
-              .thumbnail
-                = link_to book do
-                  =image_tag('no_img.png', class: "img-responsive center-block")
-                .caption
-                  %h4.text-center.item= link_to book.title, book
-                %h4.text-center.price= number_to_currency book.price
-        .text-center
-          = paginate @books
-          = page_entries_info @books
-      .col-md-2
-        %h5= t('categories.shop_by_categories')
-        - @categories.map do |category|
-          %p= link_to category.title, category
+      %h3.breadcrumb= t('categories.categories')
+      - @categories.map do |category|
+        %p= link_to category.title, category

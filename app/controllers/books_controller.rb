@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   def index
     @books = Book.page(params[:page]).per(9)
-    @categories = Category.all
+    @categories = Category.order(:title)
   end
 
   def show

@@ -1,6 +1,11 @@
 .container
   .row
     %h3
-      = link_to t('categories.shop'), books_path
-      = '>> ' + @category.title
-    = render 'books/books'
+      %ol.breadcrumb
+        %li
+          = link_to t('categories.shop'), books_path
+        %li
+          = link_to t('categories.categories'), categories_path
+        %li.active
+          = @category.title
+    = render 'books/books_categories'
