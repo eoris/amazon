@@ -1,26 +1,15 @@
 .col-sm-2
 .col-sm-8
   .col-md-12
-    .visible-sm-block.text-center
-      %h4
-        - if text_title
-          = book.title
-        - else
-          = link_to book.title, book
-      %h5
-        = t('books.by')
-        - book.authors.map do |n|
-          = link_to "#{n.firstname} #{n.lastname}", n
-    .hidden-sm
-      %h4
-        - if text_title
-          = book.title
-        - else
-          = link_to book.title, book
-      %h5
-        = t('books.by')
-        - book.authors.map do |n|
-          = link_to "#{n.firstname} #{n.lastname}", n
+    %h4
+      - if text_title
+        = book.title
+      - else
+        = link_to book.title, book
+    %h5
+      = t('books.by')
+      - book.authors.map do |n|
+        = link_to "#{n.firstname} #{n.lastname}", n
     .col-md-4
       =image_tag('no_img.png', class: "img-responsive center-block")
     .col-md-8

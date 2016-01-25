@@ -21,9 +21,12 @@
 
 en:
   books:
+    no_books_found: "No books found"
     welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!"
     add_to_cart: "ADD TO CART"
     by: "by"
+    previous: Previous
+    next: Next
   header:
     home: "HOME"
     shop: "SHOP"

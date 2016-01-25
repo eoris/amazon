@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $('#carousel-example-generic .carousel-inner > .item:first').addClass 'active'
+  $('#myCarousel .carousel-inner > .item:first').addClass 'active'
   return
