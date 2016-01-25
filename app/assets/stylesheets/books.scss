@@ -21,6 +21,15 @@
   text-overflow: ellipsis;
 }
 
+.item {
+  height: 50px;
+  overflow: hidden;
+}
+
+.thumbnail:hover {
+  background: #F5F5F5;
+}
+
 .carousel-control {
   top: 50px;
   color: #E6E6E6;
