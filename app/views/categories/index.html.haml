@@ -1,6 +1,11 @@
 .container
   .row
     .autopagerize_page_element
-      %h3.breadcrumb= t('categories.categories')
+      %h3
+        .ol.breadcrumb
+          %li
+            = link_to t('categories.shop'), books_path
+          %li.active
+            = t('categories.categories')
       - @categories.map do |category|
         %p= link_to category.title, category
