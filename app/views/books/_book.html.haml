@@ -2,13 +2,21 @@
 .col-sm-8
   .col-md-12
     .visible-sm-block.text-center
-      %h4= link_to book.title, book
+      %h4
+        - if text_title
+          = book.title
+        - else
+          = link_to book.title, book
       %h5
         = t('books.by')
         - book.authors.map do |n|
           = link_to "#{n.firstname} #{n.lastname}", n
     .hidden-sm
-      %h4= link_to book.title, book
+      %h4
+        - if text_title
+          = book.title
+        - else
+          = link_to book.title, book
       %h5
         = t('books.by')
         - book.authors.map do |n|
