@@ -8,7 +8,7 @@
               =image_tag('no_img.png', class: "img-responsive center-block")
             .caption
               %h4.text-center.item= link_to book.title, book
-              %p.books-description{:align => "justify"}= truncate(book.description, length: 150)
+              %p.books-description{:align => "justify"}= truncate(book.description, length: 100)
             %h4.text-center.price= number_to_currency book.price
     .text-center
       = paginate @books
@@ -19,7 +19,7 @@
       - @categories.map do |category|
         %li.list-group-item
           = link_to category.title, category
-      %li.list-group-item.text-center
+      %li.list-group-item
         = link_to t('categories.all_books'), books_path
-      %li.list-group-item.text-center
+      %li.list-group-item
         = link_to t('categories.all_categories'), categories_path
