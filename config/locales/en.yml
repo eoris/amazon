@@ -35,5 +35,7 @@ en:
     sign_in: "Sign In"
   categories:
     shop_by_categories: "SHOP BY CATEGORIES"
+    all_books: "All books"
+    home: "Home"
     shop: "Shop"
 
