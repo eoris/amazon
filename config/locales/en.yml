@@ -41,4 +41,5 @@ en:
     all_books: "ALL BOOKS"
     home: "Home"
     shop: "Shop"
-
+  authors:
+    find_book: "Find the book in our shop:"

@@ -8,4 +8,6 @@
           %li.active
             = t('categories.categories')
       - @categories.map do |category|
-        %p= link_to category.title, category
+        %p
+          %span.glyphicon.glyphicon-tag
+            = link_to category.title, category

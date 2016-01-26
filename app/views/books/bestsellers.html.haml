@@ -14,10 +14,9 @@
         %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
           %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
           %span.sr-only= t('books.next')
-  .container
     .row
       .col-sm-4
       .col-sm-4
-        %h4.text-center.alert.alert-info{:role => "alert"}
+        %h4#welcome.text-center.alert.alert-info{:role => "alert"}
           = t('books.welcome')
       .col-sm-4

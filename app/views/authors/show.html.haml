@@ -2,15 +2,15 @@
   .row
     .col-xs-2
     .col-xs-8
-      %h4
+      %h3
         = @author.firstname
         = @author.lastname
       %h5
-        %p{:align => "justify"}= @author.biography
+        %p.well.well-sm{:align => "justify"}= @author.biography
       %h5
-        Books:
+        %p= t('authors.find_book')
         - @author.books.each do |book|
           %p
-          .glyphicon.glyphicon-book
+            %span.glyphicon.glyphicon-book
             = link_to book.title, book
     .col-xs-2
