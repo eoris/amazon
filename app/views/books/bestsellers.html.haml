@@ -8,12 +8,12 @@
           - @books.each do |book|
             .item
               = render partial: "book", locals: {book: book, text_title: false}
-      %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
-        %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
-        %span.sr-only= t('books.previous')
-      %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
-        %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
-        %span.sr-only= t('books.next')
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+          %span.sr-only= t('books.previous')
+        %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+          %span.sr-only= t('books.next')
   .container
     .row
       .col-sm-4

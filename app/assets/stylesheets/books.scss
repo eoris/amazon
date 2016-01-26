@@ -15,8 +15,8 @@
   height: unset;
 }
 
-#bestseller-description {
-  height: 150px;
+#book-description {
+  min-height: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -32,11 +32,6 @@
 
 .thumbnail:hover {
   background: #F5F5F5;
-}
-
-.carousel-control {
-  top: 50px;
-  color: #E6E6E6;
 }
 
 .left.carousel-control {
