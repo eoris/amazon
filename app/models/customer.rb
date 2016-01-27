@@ -1,9 +1,13 @@
 class Customer < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockabley, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
   has_many :orders
   has_many :ratings
   has_many :addresses
   has_many :credit_cards
 
-  validates :password, :firstname, :lastname, :email, presence: true
+  validates :encrypted_password, :firstname, :lastname, :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
 end

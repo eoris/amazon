@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :customers
   root 'books#bestsellers'
   resources :books, only: [:index, :show]
   resources :categories, only: [:index, :show]

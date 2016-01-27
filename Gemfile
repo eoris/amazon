@@ -9,6 +9,8 @@ gem 'pg', '~> 0.18.4'
 gem "haml-rails", "~> 0.9"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Use Devise
+gem 'devise'
 # Use Bootstrap
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
