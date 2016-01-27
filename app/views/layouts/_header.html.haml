@@ -17,5 +17,17 @@
             %a{:href => "#"}= t('header.settings')
           %li
             %a{:href => "#"}= t('header.orders')
-          %li
-            %a{:href => "#"}= t('header.sign_in')
+          / %li
+          /   %a{:href => "#"}= t('header.sign_in')
+          - if customer_signed_in?
+            %li
+              = link_to('Logout', destroy_customer_session_path, :method => :delete)
+          - else
+            %li
+              = link_to(t('header.sign_in'), new_customer_session_path)
+          - if customer_signed_in?
+            %li
+              = link_to('Edit registration', edit_customer_registration_path)
+          - else
+            %li
+              = link_to('Register', new_customer_registration_path)
