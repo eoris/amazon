@@ -9,5 +9,4 @@ class Customer < ActiveRecord::Base
   has_many :credit_cards
 
   validates :encrypted_password, :firstname, :lastname, :email, presence: true
-  validates :email, uniqueness: { case_sensitive: false }
 end
