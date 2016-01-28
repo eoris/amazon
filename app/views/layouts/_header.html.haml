@@ -22,6 +22,6 @@
               = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete)
           - else
             %li
-              %button.btn.btn-success.navbar-btn{:type => "button"}= link_to(t('header.sign_up'), new_customer_registration_path)
+              .btn.btn-success.navbar-btn{:type => "button"}= link_to(t('header.sign_up'), new_customer_registration_path)
             %li
-              %button.btn.btn-default.navbar-btn{:type => "button"}= link_to(t('header.sign_in'), new_customer_session_path)
+              .btn.btn-default.navbar-btn{:type => "button"}= link_to(t('header.sign_in'), new_customer_session_path)

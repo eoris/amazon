@@ -34,9 +34,9 @@ en:
     orders: 'Orders'
     sign_in: 'Sign In'
     sign_up: 'Sign Up'
-    logout: 'Logout'
+    sign_out: 'Sign Out'
     # edit_registration: 'Edit registration'
-    registration: 'Register'
+    # registration: 'Register'
   categories:
     categories: 'Categories'
     shop_by_categories: 'SHOP BY CATEGORIES'
