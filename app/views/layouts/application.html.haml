@@ -9,15 +9,5 @@
     = csrf_meta_tags
   %body
     = render 'layouts/header'
-    .container
-      .row
-        .col-md-4
-        .col-md-4
-          %p.notice= notice
-          - flash.each do |key, value|
-            .alert.alert-danger.alert-dismissible{:role => "alert"}
-              %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-                %span{"aria-hidden" => "true"} &times;
-              = value
-        .col-md-4
+    = render 'layouts/messages'
     = yield

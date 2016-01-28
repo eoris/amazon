@@ -19,7 +19,7 @@
             %li
               = link_to(t('header.settings'), edit_customer_registration_path)
             %li
-              = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete)
+              = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete, class: "btn btn-default navbar-btn")
           - else
             %li
               = link_to(t('header.sign_up'), new_customer_registration_path, class: "btn btn-success navbar-btn")

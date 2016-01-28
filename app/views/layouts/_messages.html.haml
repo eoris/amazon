@@ -1,0 +1,11 @@
+.container
+  .row
+    .col-md-4
+    .col-md-4
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key} alert-dismissible"}
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+          = value
+    .col-md-4
+
