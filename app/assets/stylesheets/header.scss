@@ -5,3 +5,15 @@
 span.glyphicon:nth-child(2) {
   color: white;
 }
+
+.navbar-btn {
+  margin-left: 5px;
+}
+
+.btn-success.navbar-btn a{
+  color: white;
+}
+
+.btn-default.navbar-btn a{
+  color: black;
+}
