@@ -11,6 +11,7 @@ gem "haml-rails", "~> 0.9"
 gem 'sass-rails', '~> 5.0'
 # Use Devise
 gem 'devise'
+gem 'devise-bootstrap-views'
 # Use Bootstrap
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
