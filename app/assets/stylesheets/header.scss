@@ -10,12 +10,31 @@ span.glyphicon:nth-child(2) {
   margin-left: 5px;
 }
 
-.btn-success.navbar-btn a{
+a.btn.btn-success.navbar-btn {
   color: white;
-  text-decoration: none;
+  padding: 6px 12px;
+  background-color: #60B044;
+  background-image: linear-gradient(#8ADD6D, #60B044);
+  border-color: #5CA941;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.15);
 }
 
-.btn-default.navbar-btn a{
+.navbar-inverse .navbar-nav > li > a.btn.btn-success.navbar-btn:hover, .navbar-inverse .navbar-nav > li > a.btn.btn-success.navbar-btn:focus {
+  color: #FFF;
+  background-image: linear-gradient(#79D858, #569E3D);
+  border-color: #4A993E;
+}
+
+a.btn.btn-default.navbar-btn {
   color: black;
-  text-decoration: none;
+  padding: 6px 12px;
+  background-color: #EEE;
+  background-image: linear-gradient(#FCFCFC, #EEE);
+  border: 1px solid #D5D5D5;
+}
+
+.navbar-inverse .navbar-nav > li > a.btn.btn-default.navbar-btn:hover, .navbar-inverse .navbar-nav > li > a.btn.btn-default.navbar-btn:focus {
+  color: black;
+  background-image: linear-gradient(#EEE, #DDD);
+  border-color: #CCC;
 }
