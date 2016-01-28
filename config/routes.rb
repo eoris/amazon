@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
+  mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
   devise_for :customers
   root 'books#bestsellers'
   resources :books, only: [:index, :show]

@@ -12,6 +12,8 @@ gem 'sass-rails', '~> 5.0'
 # Use Devise
 gem 'devise'
 gem 'devise-bootstrap-views'
+# Use Rails Admin
+gem 'rails_admin'
 # Use Bootstrap
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
