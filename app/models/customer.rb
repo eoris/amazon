@@ -8,5 +8,4 @@ class Customer < ActiveRecord::Base
   has_many :addresses
   has_many :credit_cards
 
-  validates :encrypted_password, :firstname, :lastname, :email, presence: true
 end
