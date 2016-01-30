@@ -12,6 +12,8 @@ gem 'sass-rails', '~> 5.0'
 # Use Devise
 gem 'devise'
 gem 'devise-bootstrap-views'
+# Use Simple form
+gem 'simple_form'
 # Use Rails Admin
 gem 'rails_admin'
 # Use Bootstrap
