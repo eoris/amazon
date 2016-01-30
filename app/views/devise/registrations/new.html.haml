@@ -2,33 +2,16 @@
   .row
     .col-md-4
     .col-md-4
-      = bootstrap_devise_error_messages!
-    .col-md-4
-.container
-  .row
-    .col-md-4
-    .col-md-4
       .panel.panel-default
         .panel-heading
           %h4= t('.sign_up', :default => "Sign up")
         .panel-body
-          = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f|
-            .form-group
-              = f.label :firstname
-              = f.text_field :firstname, autofocus: true, class: "form-control"
-            .form-group
-              = f.label :lastname
-              = f.text_field :lastname, class: "form-control"
-            .form-group
-              = f.label :email
-              = f.email_field :email, class: "form-control"
-            .form-group
-              = f.label :password
-              %br/
-              = f.password_field :password, class: "form-control"
-            .form-group
-              = f.label :password_confirmation
-              = f.password_field :password_confirmation, class: "form-control"
+          = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f|
+            = f.input :firstname, autofocus: true, class: "form-control"
+            = f.input :lastname, class: "form-control"
+            = f.input :email, class: "form-control"
+            = f.input :password, class: "form-control"
+            = f.input :password_confirmation, class: "form-control"
             = f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary"
       = render "devise/shared/links"
     .col-md-4
