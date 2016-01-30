@@ -15,6 +15,8 @@ RSpec.describe Customer, type: :model do
   it { is_expected.to have_db_column(:current_sign_in_ip) }
   it { is_expected.to have_db_column(:last_sign_in_ip) }
 
+  it { is_expected.to validate_presence_of(:firstname) }
+  it { is_expected.to validate_presence_of(:lastname) }
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_presence_of(:password) }
 
