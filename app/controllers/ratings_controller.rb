@@ -8,8 +8,16 @@ class RatingsController < ApplicationController
 
   def create
     @book = Book.find(params[:book_id])
-    @rating = @book.ratings.create(rating_params)
-    redirect_to @book
+    @rating = @book.ratings.build(rating_params)
+    @rating.customer_id = current_customer.id if current_customer
+    @rating.save
+    if @rating.save
+      redirect_to @book
+      flash[:notice] = "Thank you for your review"
+    else
+      flash.now[:error] = "Add rating and review or press 'Cancel'"
+      render 'new'
+    end
   end
 
   private
