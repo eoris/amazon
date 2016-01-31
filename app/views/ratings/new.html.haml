@@ -1,7 +1,14 @@
 .container
   .row
-    %h2 Add review
-    = simple_form_for([@book, @book.ratings.build]) do |f|
-      = f.input :rating
-      = f.input :review
-      = f.button :submit
+    .col-md-2
+    .col-md-8
+      %h4
+        = t('rating.new_review_for')
+        = link_to @book.title, @book
+      = simple_form_for([@book, @book.ratings.build]) do |f|
+        = f.input :rating, label: t('rating.rating')
+        = f.input :review, label: t('rating.review')
+        = f.button :submit, t('rating.add')
+        or
+        = link_to t('rating.cancel'), @book
+    .col-md-2

@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @book = Book.find(params[:book_id])
     @rating = Rating.new

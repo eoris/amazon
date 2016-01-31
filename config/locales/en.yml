@@ -47,3 +47,9 @@ en:
     shop: 'Shop'
   authors:
     find_book: 'Find the book in our shop:'
+  rating:
+    new_review_for: 'New review for'
+    rating: 'Rating'
+    review: 'Review'
+    add: 'ADD'
+    cancel: 'Cancel'
