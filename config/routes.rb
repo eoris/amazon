@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
   devise_for :customers
   root 'books#bestsellers'
-  resources :books, only: [:index, :show]
+  resources :books, only: [:index, :show] do
+    resources :ratings
+  end
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
   # The priority is based upon order of creation: first created -> highest priority.
