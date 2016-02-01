@@ -5,3 +5,12 @@
 $(document).ready ->
   $('#myCarousel .carousel-inner > .item:first').addClass 'active'
   return
+
+$.fn.stars = ->
+  $(this).each ->
+    $(this).html $('<span />').width(Math.max(0, Math.min(10, parseFloat($(this).html()))) * 16)
+    return
+
+$ ->
+  $('span.stars').stars()
+  return
