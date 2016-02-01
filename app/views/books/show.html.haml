@@ -11,9 +11,8 @@
         = link_to 'Add review to this book', new_book_rating_path(@book)
         %h4 Reviews
         - @book.ratings.map do |r|
-          .container
-            .row
-            = r.rating
-            = r.customer.firstname
-            %p= r.review
+          = r.rating
+          = "#{r.customer.firstname} #{r.customer.lastname}"
+          = r.created_at.strftime("%B %d, %Y")
+          .well.well-sm= r.review
       .col-md-2

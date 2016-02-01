@@ -25,6 +25,12 @@ class RatingsController < ApplicationController
     end
   end
 
+  def destroy
+    @book = Book.find(params[:book_id])
+    @rating = @book.ratings.find(params[:id])
+    @rating.destroy
+  end
+
   private
 
    def rating_params
