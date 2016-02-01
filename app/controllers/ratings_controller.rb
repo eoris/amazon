@@ -3,7 +3,12 @@ class RatingsController < ApplicationController
 
   def new
     @book = Book.find(params[:book_id])
-    @rating = Rating.new
+    if @book.ratings.map(&:customer_id).include? current_customer.id
+      flash[:error] = "You have already left a review"
+      redirect_to @book
+    else
+      @rating = Rating.new
+    end
   end
 
   def create
