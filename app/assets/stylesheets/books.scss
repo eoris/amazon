@@ -54,6 +54,10 @@ body {
   overflow-y: scroll;
 }
 
+.thumbnail.reviews {
+  height: auto;
+}
+
 /*jQuery Stars*/
 span.stars, span.stars span {
   display: block;
