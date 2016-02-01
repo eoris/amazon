@@ -27,8 +27,13 @@ class RatingsController < ApplicationController
 
   def destroy
     @book = Book.find(params[:book_id])
-    @rating = @book.ratings.find(params[:id])
-    @rating.destroy
+    if @book.ratings.map(&:customer_id).include? current_customer.id
+      @rating = @book.ratings.find(params[:id])
+      @rating.destroy
+    else
+      flash[:error] = "You do not have permission to remove this review"
+      redirect_to @book
+    end
   end
 
   private
