@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
-  devise_for :customers
+  devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
   root 'books#bestsellers'
   resources :books, only: [:index, :show] do
     resources :ratings

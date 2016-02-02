@@ -12,6 +12,9 @@ gem 'sass-rails', '~> 5.0'
 # Use Devise
 gem 'devise'
 gem 'devise-bootstrap-views'
+# Use Omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
 # Use Simple form
 gem 'simple_form'
 # Use Rails Admin
