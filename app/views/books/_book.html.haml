@@ -11,13 +11,7 @@
       = link_to "#{n.firstname} #{n.lastname}", n
   .col-md-4
     =image_tag('no_img.png', class: "img-responsive center-block")
-    - if book.ratings.empty?
-      %p.text-center
-        %small.text-muted= t('book.not_raited')
-    - else
-      %span.stars.center-block= book.ratings.average(:rating).round(2)
-      %p.text-center
-        %small.text-muted= book.ratings.average(:rating).round(2)
+    = render partial: "stars", locals: {book: book}
   .col-md-8
     %p#book-description{:align => "justify"}
       = book.description
