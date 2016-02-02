@@ -4,10 +4,8 @@
   %h4 Reviews
   - @book.ratings.map do |r|
     .panel.panel-default.panel-body
-      .list-inline
-        %li= "by #{r.customer.firstname} #{r.customer.lastname}"
-        %li
-          %span.stars= r.rating
+      = "by #{r.customer.firstname} #{r.customer.lastname}"
       %small.text-muted= r.created_at.strftime("%B %d, %Y")
       .well.well-sm= r.review
+      %span.stars.pull-left= r.rating
 .col-md-2

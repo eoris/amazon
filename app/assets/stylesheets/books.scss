@@ -2,19 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  overflow-y: scroll;
+}
+
 .form-inline .form-control {
   width: 45px;
   display: inline;
 }
 
-.item.active {
-  height: unset;
-}
-
-.item.next {
-  height: unset;
-}
-
+/*shop*/
 #book-description {
   min-height: 150px;
   overflow: hidden;
@@ -42,6 +39,7 @@
   background: #F5F5F5;
 }
 
+/*bestsellers carousel*/
 .left.carousel-control {
   background-image: none;
 }
@@ -50,8 +48,17 @@
   background-image: none;
 }
 
-body {
-  overflow-y: scroll;
+.item.active {
+  height: unset;
+}
+
+.item.next {
+  height: unset;
+}
+
+/*book review*/
+.well {
+  margin-bottom: 10px;
 }
 
 .thumbnail.reviews {
@@ -69,3 +76,4 @@ span.stars, span.stars span {
 span.stars span {
   background-position: 0 0;
 }
+
