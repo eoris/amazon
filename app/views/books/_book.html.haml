@@ -13,7 +13,7 @@
     =image_tag('no_img.png', class: "img-responsive center-block")
     - if book.ratings.empty?
       %p.text-center
-        %small.text-muted= 'Not rated'
+        %small.text-muted= t('book.not_raited')
     - else
       %span.stars.center-block= book.ratings.average(:rating).round(2)
       %p.text-center

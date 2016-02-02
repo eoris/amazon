@@ -25,8 +25,9 @@ en:
     welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!"
     add_to_cart: 'ADD TO CART'
     by: 'by'
-    previous: Previous
-    next: Next
+    previous: 'Previous'
+    next: 'Next'
+    not_rated: 'Not rated'
   header:
     home: 'HOME'
     shop: 'SHOP'
