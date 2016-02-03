@@ -14,24 +14,12 @@ class RatingsController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     @rating = @book.ratings.build(rating_params)
-    if @rating.valid?
-      @rating.customer_id = current_customer.id if current_customer
-      if @rating.save
-        redirect_to @book, notice: "Thank you for your review"
-      else
-        flash.now[:error] = "Something went wrong"
-      end
+    @rating.customer_id = current_customer.id if current_customer
+    if @rating.save
+      redirect_to @book, notice: "Thank you for your review"
     else
       render 'new'
-    end
-  end
-
-  def destroy
-    if current_customer && @rating = current_customer.ratings.find(params[:id])
-      @rating.destroy
-    else
-      flash[:error] = "Not authorized customer"
-      redirect_to @book
+      flash.now[:error] = "Something went wrong"
     end
   end
 
