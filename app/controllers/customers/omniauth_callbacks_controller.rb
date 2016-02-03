@@ -1,4 +1,4 @@
-class Customer::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class Customers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     # You need to implement the method below in your model (e.g. app/models/customer.rb)
     @customer = Customer.from_omniauth(request.env["omniauth.auth"])

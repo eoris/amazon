@@ -2,8 +2,8 @@ class Customer < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockabley, :timeoutable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
   has_many :orders
   has_many :ratings
   has_many :addresses
@@ -25,12 +25,6 @@ class Customer < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         customer.email = data["email"] if customer.email.blank?
       end
-    end
-  end
-
-  def facebook
-    if request.env["omniauth.auth"].info.email.blank?
-      redirect_to "/customers/auth/facebook?auth_type=rerequest&scope=email"
     end
   end
 
