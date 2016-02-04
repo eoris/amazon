@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
   root 'books#bestsellers'
   resources :books, only: [:index, :show] do
-    resources :ratings
+    resources :ratings, only: [:new, :create]
   end
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
+  resources :order_items, only: [:index, :new]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
