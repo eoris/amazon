@@ -1,7 +1,8 @@
-- if book.ratings.empty?
-  %p.text-center
-    %small.text-muted= t('book.not_raited')
-- else
-  %span.stars.center-block= avg_rating(book)
-  %p.text-center
-    %small.text-muted= avg_rating(book)
+.stars-block
+  - if book.ratings.empty?
+    %p.text-center
+      %small.text-muted= t('book.not_raited')
+  - else
+    %span.stars.center-block= avg_rating(book)
+    %p.text-center
+      %small.text-muted= avg_rating(book)
