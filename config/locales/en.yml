@@ -21,16 +21,36 @@
 
 en:
   books:
+    no_books_found: 'No books found'
     welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!"
-    add_to_cart: "ADD TO CART"
-    by: "by"
+    add_to_cart: 'ADD TO CART'
+    by: 'by'
+    previous: 'Previous'
+    next: 'Next'
+    not_rated: 'Not rated'
   header:
-    home: "HOME"
-    shop: "SHOP"
-    settings: "Settings"
-    orders: "Orders"
-    sign_in: "Sign In"
+    home: 'HOME'
+    shop: 'SHOP'
+    settings: 'Settings'
+    orders: 'Orders'
+    sign_in: 'Sign In'
+    sign_up: 'Sign Up'
+    sign_out: 'Sign Out'
+    # edit_registration: 'Edit registration'
+    # registration: 'Register'
   categories:
-    shop_by_categories: "SHOP BY CATEGORIES"
-    shop: "Shop"
-
+    categories: 'Categories'
+    shop_by_categories: 'SHOP BY CATEGORIES'
+    category: 'Category'
+    all_categories: 'ALL CATEGORIES'
+    all_books: 'ALL BOOKS'
+    home: 'Home'
+    shop: 'Shop'
+  authors:
+    find_book: 'Find the book in our shop:'
+  rating:
+    new_review_for: 'New review for'
+    rating: 'Rating'
+    review: 'Review'
+    add: 'ADD'
+    cancel: 'Cancel'

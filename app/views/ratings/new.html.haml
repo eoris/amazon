@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-md-2
+    .col-md-8
+      %h4
+        = t('rating.new_review_for')
+        = link_to @book.title, @book
+      = simple_form_for [@book, @rating] do |f|
+        = f.input :rating, label: t('rating.rating'),
+          as: :radio_buttons, collection: 1..10,
+          item_label_class: "radio-inline", item_wrapper_tag: false
+        = f.input :review, label: t('rating.review')
+        = f.button :submit, t('rating.add')
+        or
+        = link_to t('rating.cancel'), @book
+    .col-md-2

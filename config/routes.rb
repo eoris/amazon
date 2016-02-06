@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
+  devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
   root 'books#bestsellers'
-  resources :books, only: [:index, :show]
+  resources :books, only: [:index, :show] do
+    resources :ratings, only: [:new, :create]
+  end
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
+  resources :order_items
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

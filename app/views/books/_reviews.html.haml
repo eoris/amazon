@@ -1,0 +1,11 @@
+.col-md-2
+.col-md-8
+  = link_to 'Add review to this book', new_book_rating_path(@book)
+  %h4 Reviews
+  - @book.ratings.map do |r|
+    .panel.panel-default.panel-body
+      = "by #{r.customer.firstname} #{r.customer.lastname}"
+      %small.text-muted= r.created_at.strftime("%B %d, %Y")
+      .well.well-sm= r.review
+      %span.stars.pull-left= r.rating
+.col-md-2

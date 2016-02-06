@@ -1,41 +1,22 @@
 - if @books.nil?
-  %h3.error.text-center No books found
+  %h3.error.text-center= t('books.no_books_found')
 - else
   .container
     .row
-      - @books.each do |book|
-        .col-md-3
-        .col-md-6
-          .col-sm-12
-            .visible-xs-block.text-center
-              %h4= link_to book.title, book
-              %h5
-                = t('books.by')
-                - book.authors.map do |n|
-                  = link_to "#{n.firstname} #{n.lastname}", n
-            .hidden-xs
-              %h4= link_to book.title, book
-              %h5
-                = t('books.by')
-                - book.authors.map do |n|
-                  = link_to "#{n.firstname} #{n.lastname}", n
-          .col-sm-3.col-md-3
-            =image_tag('no_img.png', class: "img-responsive center-block")
-          .col-sm-9.col-md-9
-            %p{:align => "justify"}= book.description
-          .col-sm-12
-            %h4.form-inline.pull-right
-              = number_to_currency book.price
-              %input.form-control{:type => "text", :value => "1"}
-              %button.btn.btn-primary{:type => "submit"}= t('books.add_to_cart')
-          %h4.col-sm-12
-        .col-md-3
-  .container
+      #myCarousel.carousel.slide{"data-ride" => "carousel", "data-interval" => "7000" }
+        .carousel-inner{:role => "listbox"}
+          - @books.each do |book|
+            .item
+              = render partial: "book", locals: {book: book, text_title: false}
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+          %span.sr-only= t('books.previous')
+        %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+          %span.sr-only= t('books.next')
     .row
       .col-sm-4
       .col-sm-4
-        %h4.text-center
+        %h4#welcome.text-center{:role => "alert"}
           = t('books.welcome')
       .col-sm-4
-
-

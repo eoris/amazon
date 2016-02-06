@@ -9,6 +9,16 @@ gem 'pg', '~> 0.18.4'
 gem "haml-rails", "~> 0.9"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Use Devise
+gem 'devise'
+gem 'devise-bootstrap-views'
+# Use Omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
+# Use Simple form
+gem 'simple_form'
+# Use Rails Admin
+gem 'rails_admin'
 # Use Bootstrap
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
@@ -27,6 +37,7 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc

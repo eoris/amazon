@@ -2,11 +2,87 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.form-inline .form-control {
-  width: 50px;
+body {
+  overflow-y: scroll;
 }
 
-.form-control {
-  width: 50px;
+/*add_to_cart form*/
+.form-inline .form-control {
+  width: 55px;
   display: inline;
 }
+
+.form-group {
+  display: inline;
+}
+
+/*shop*/
+#book-description {
+  min-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.books-description {
+  height: 60px;
+}
+
+.books-title {
+  height: 40px;
+  overflow: hidden;
+}
+
+.thumbnail {
+  height: 350px;
+}
+
+.thumbnail:hover {
+  background: #F5F5F5;
+}
+
+.list-group-item:hover {
+  background: #F5F5F5;
+}
+
+/*bestsellers carousel*/
+.left.carousel-control {
+  background-image: none;
+}
+
+.right.carousel-control {
+  background-image: none;
+}
+
+.item.active {
+  height: unset;
+}
+
+.item.next {
+  height: unset;
+}
+
+/*book review*/
+.well {
+  margin-bottom: 10px;
+}
+
+.thumbnail.reviews {
+  height: auto;
+}
+
+/*jQuery Stars*/
+span.stars, span.stars span {
+  display: block;
+  background: url(stars.png) 0 -16px repeat-x;
+  width: 160px;
+  height: 16px;
+}
+
+span.stars span {
+  background-position: 0 0;
+}
+
+.stars-block {
+  height: 36px;
+}
+

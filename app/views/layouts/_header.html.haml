@@ -1,4 +1,4 @@
-%nav.navbar
+%nav.navbar.navbar-inverse.navbar-static-top
   .container
     .row
       .navbar-header
@@ -13,9 +13,15 @@
           %li
             %a{:href => "/books"}= t('header.shop')
         %ul.nav.navbar-nav.navbar-right
-          %li
-            %a{:href => "#"}= t('header.settings')
-          %li
-            %a{:href => "#"}= t('header.orders')
-          %li
-            %a{:href => "#"}= t('header.sign_in')
+          - if customer_signed_in?
+            %li
+              %a{:href => "#"}= t('header.orders')
+            %li
+              = link_to(t('header.settings'), edit_customer_registration_path)
+            %li
+              = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete, class: "btn btn-default navbar-btn")
+          - else
+            %li
+              = link_to(t('header.sign_up'), new_customer_registration_path, class: "btn btn-success navbar-btn")
+            %li
+              = link_to(t('header.sign_in'), new_customer_session_path, class: "btn btn-default navbar-btn")
