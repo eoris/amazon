@@ -15,8 +15,5 @@
   .col-md-8
     %p#book-description{:align => "justify"}
       = book.description
-  %h4.form-inline.pull-right
-    = number_to_currency book.price
-    %input.form-control{:type => "text", :value => "1"}
-    %button.btn.btn-primary{:type => "submit"}= t('books.add_to_cart')
+  = render partial: "order_items/add_to_cart", locals: {book: book}
 .col-sm-2

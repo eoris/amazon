@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
-  resources :order_items, only: [:index, :new]
+  resources :order_items
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -6,8 +6,13 @@ body {
   overflow-y: scroll;
 }
 
+/*add_to_cart form*/
 .form-inline .form-control {
-  width: 45px;
+  width: 55px;
+  display: inline;
+}
+
+.form-group {
   display: inline;
 }
 
