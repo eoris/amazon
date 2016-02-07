@@ -15,10 +15,6 @@ RSpec.describe RatingsHelper, type: :helper do
   describe "#avg_rating" do
     before { @book = FactoryGirl.create(:book) }
 
-    it "should be nil when there are no ratings" do
-      expect(avg_rating(@book)).to be_nil
-    end
-
     it "should calculate average rating properly" do
       [10, 9, 9].each do |r|
         FactoryGirl.create(:rating, rating: r, book: @book)
