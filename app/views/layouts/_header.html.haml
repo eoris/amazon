@@ -15,12 +15,16 @@
         %ul.nav.navbar-nav.navbar-right
           - if customer_signed_in?
             %li
+              = link_to("Cart", order_items_path)
+            %li
               %a{:href => "#"}= t('header.orders')
             %li
               = link_to(t('header.settings'), edit_customer_registration_path)
             %li
               = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete, class: "btn btn-default navbar-btn")
           - else
+            %li
+              = link_to("Cart", order_items_path)
             %li
               = link_to(t('header.sign_up'), new_customer_registration_path, class: "btn btn-success navbar-btn")
             %li

@@ -1,6 +1,7 @@
 class Book < ActiveRecord::Base
   belongs_to :category
   has_many :ratings
+  has_many :order_items
   has_and_belongs_to_many :authors
 
   validates :title, :price, :quantity_in_stock, presence: true
