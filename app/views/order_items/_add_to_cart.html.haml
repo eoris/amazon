@@ -1,7 +1,6 @@
 %h4.form-inline.pull-right
-  -# %input.form-control{:type => "text", :value => "1"}
-  -# %button.btn.btn-primary{:type => "submit"}= t('books.add_to_cart')
   = simple_form_for @order_item do |f|
     = number_to_currency book.price
-    = f.input :quantity, class: "form-control", label: false
+    = f.input :quantity, class: "form-control",
+      input_html: { value: '1', min: '1', max: '99' }, label: false
     = f.button :submit, t('books.add_to_cart'), class: "btn btn-primary"

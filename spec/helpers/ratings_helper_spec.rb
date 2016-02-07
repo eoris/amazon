@@ -19,7 +19,7 @@ RSpec.describe RatingsHelper, type: :helper do
       [10, 9, 9].each do |r|
         FactoryGirl.create(:rating, rating: r, book: @book)
       end
-      expect(avg_rating(@book)).to eq(9.33)
+      expect(avg_rating(@book)).to eq("9.33")
     end
 
   end
