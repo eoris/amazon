@@ -4,7 +4,7 @@ class OrderItem < ActiveRecord::Base
 
   validates :price, :quantity, presence: true
 
-  def subtotal_price(item)
-    quantity * item.price
+  def subtotal_price
+    quantity * book.price
   end
 end
