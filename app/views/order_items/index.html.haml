@@ -1,1 +1,3 @@
-= session[:order_item]
+- @cart.each do |item|
+  %br
+    = "Book: #{Book.find(item["book_id"]).title}, Quantity: #{item["quantity"].to_s}"

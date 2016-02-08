@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   def index
-    @order_items = OrderItem.all
+    @cart = cart
   end
 
   def new
@@ -10,7 +10,7 @@ class OrderItemsController < ApplicationController
   def create
     @order_item = OrderItem.new(order_item_params)
     @order_item.price = @order_item.subtotal_price
-    session[:order_item] = @order_item
+    cart << order_item_params
     redirect_to :back
   end
 
@@ -18,5 +18,9 @@ class OrderItemsController < ApplicationController
 
     def order_item_params
       params.require(:order_item).permit(:quantity, :book_id)
+    end
+
+    def cart
+     session[:cart] ||= []
     end
 end
