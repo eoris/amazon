@@ -3,14 +3,13 @@ class OrderItemsController < ApplicationController
     @cart = cart
   end
 
-  def new
-
+  def create
+    cart << order_item_params
+    redirect_to :back
   end
 
-  def create
-    @order_item = OrderItem.new(order_item_params)
-    @order_item.price = @order_item.subtotal_price
-    cart << order_item_params
+  def clear
+    session[:cart] = nil
     redirect_to :back
   end
 

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
   resources :order_items
+  get 'clear_order_items/' => 'order_items#clear'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

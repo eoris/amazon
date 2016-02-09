@@ -1,3 +1,7 @@
 - @cart.each do |item|
   %br
-    = "Book: #{Book.find(item["book_id"]).title}, Quantity: #{item["quantity"].to_s}"
+    = "Book: #{Book.find(item["book_id"]).title},
+      Quantity: #{item["quantity"]},
+      Price: #{item["quantity"].to_i * Book.find(item["book_id"]).price}"
+
+= link_to 'Clear', clear_order_items_path
