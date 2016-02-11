@@ -2,6 +2,6 @@
   = simple_form_for @order_item do |f|
     = number_to_currency book.price
     = f.input :quantity, class: "form-control",
-      input_html: { value: '1', min: '1', max: '99' }, label: false
+      input_html: { value: '1', min: '1', max: "#{book.quantity_in_stock}" }, label: false
     = f.hidden_field :book_id, value: book.id
     = f.button :submit, t('books.add_to_cart'), class: "btn btn-primary"
