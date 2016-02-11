@@ -9,7 +9,7 @@ class OrderItemsController < ApplicationController
   end
 
   def remove_item
-    session[:cart].delete_if {|item| item.keys.include?(params[:item_id])}
+    cart.delete_if {|item| item.keys.include?(params[:item_id])}
     redirect_to :back
   end
 
@@ -21,13 +21,13 @@ class OrderItemsController < ApplicationController
   private
 
     def summarized_merge(cart)
-      hash_2 = Hash.new(0)
+      hash = Hash.new(0)
         cart.each do |cart_hash|
           cart_hash.each do |key, value|
-            hash_2[key] += value.to_i
+            hash[key] += value.to_i
           end
         end
-      hash_2
+      hash
     end
 
     def order_item_params

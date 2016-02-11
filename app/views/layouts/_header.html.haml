@@ -13,9 +13,11 @@
           %li
             %a{:href => "/books"}= t('header.shop')
         %ul.nav.navbar-nav.navbar-right
+          %li
+            = link_to(order_items_path) do
+              %span.glyphicon.glyphicon-shopping-cart
+              = t('header.cart') + " (#{cart_count})"
           - if customer_signed_in?
-            %li
-              = link_to("Cart", order_items_path)
             %li
               %a{:href => "#"}= t('header.orders')
             %li
@@ -23,8 +25,6 @@
             %li
               = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete, class: "btn btn-default navbar-btn")
           - else
-            %li
-              = link_to("Cart", order_items_path)
             %li
               = link_to(t('header.sign_up'), new_customer_registration_path, class: "btn btn-success navbar-btn")
             %li
