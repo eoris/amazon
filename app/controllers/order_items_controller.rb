@@ -8,6 +8,11 @@ class OrderItemsController < ApplicationController
     redirect_to :back
   end
 
+  def remove_item
+    session[:cart].delete_if {|item| item.keys.include?(params[:item_id])}
+    redirect_to :back
+  end
+
   def clear
     session[:cart] = nil
     redirect_to :back

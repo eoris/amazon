@@ -3,4 +3,5 @@
     = "Book: #{Book.find_by(id: book_id.to_i).title},
       Quantity: #{qty},
       Price: #{qty * Book.find_by(id: book_id.to_i).price}"
+    = link_to 'Delete', remove_item_order_items_path(item_id: book_id)
 = link_to 'Clear', clear_order_items_path
