@@ -64,6 +64,7 @@ en:
         back: "Back"
       new:
         sign_up: "Sign up"
+        or: "or"
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
@@ -76,6 +77,7 @@ en:
       signed_out: "Signed out successfully."
       new:
         sign_in: "Sign in"
+        or: "or"
     shared:
       links:
         didn_t_receive_confirmation_instructions: "Didn't receive confirmation instructions?"

@@ -1,0 +1,11 @@
+.container
+  .row
+    .col-md-4
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          %h4
+            = t('.sign_in', :default => "Sign in")
+            %small.as-admin= t('admin.as_admin', :default => "as Admin")
+        = render 'form'
+    .col-md-4

@@ -54,3 +54,5 @@ en:
     review: 'Review'
     add: 'ADD'
     cancel: 'Cancel'
+  admin:
+    as_admin: 'as Admin'
