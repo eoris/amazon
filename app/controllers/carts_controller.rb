@@ -1,10 +1,10 @@
-class OrderItemsController < ApplicationController
+class CartsController < ApplicationController
+
   def index
     @cart = OrderItem.summarized_merge(cart)
-    byebug
   end
 
-  def create
+  def add_item
     cart << {params[:order_item][:book_id] => params[:order_item][:quantity]}
     redirect_to :back
   end

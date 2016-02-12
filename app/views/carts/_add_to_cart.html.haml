@@ -1,5 +1,5 @@
 %h4.form-inline.pull-right
-  = simple_form_for @order_item do |f|
+  = simple_form_for @order_item, url: cart_url do |f|
     = number_to_currency book.price
     = f.input :quantity, class: "form-control",
       input_html: { value: '1', min: '1', max: "#{book.quantity_in_stock}" }, label: false

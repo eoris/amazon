@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   end
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
-  resources :order_items do
-    get :clear, on: :collection
-    get :remove_item, on: :collection
-  end
+  resources :order_items
+
+  get 'cart' => 'carts#index'
+  post 'cart' => 'carts#add_item'
+  delete 'cart/remove_item' => 'carts#remove_item'
+  delete 'cart/clear' => 'carts#clear'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -15,5 +15,5 @@
   .col-md-8
     %p#book-description{:align => "justify"}
       = book.description
-  = render partial: "order_items/add_to_cart", locals: {book: book}
+  = render partial: "carts/add_to_cart", locals: {book: book}
 .col-sm-2
