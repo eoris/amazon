@@ -57,3 +57,15 @@ en:
     cancel: 'Cancel'
   admin:
     as_admin: 'as Admin'
+  cart:
+    book: 'BOOK'
+    price: 'PRICE'
+    qty: 'QTY'
+    total: 'TOTAL'
+    subtotal: 'SUBTOTAL:'
+    update: 'UPDATE'
+    checkout: 'CHECKOUT'
+    empty_cart: 'EMPTY CART'
+    continue_shoping: 'CONTINUE SHOPING'
+    coupon_code: 'Coupon code'
+    your_cart_empty: 'Your shopping cart is empty'

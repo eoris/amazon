@@ -1,7 +1,11 @@
+- if @cart.blank?
+  = t('cart.your_cart_empty')
 - @cart.each_pair do |book_id, qty|
   %br
-    = "Book: #{Book.find_by(id: book_id.to_i).title},
+    = "Book: #{order_item_book(book_id).title},
       Quantity: #{qty},
-      Price: #{qty * Book.find_by(id: book_id.to_i).price}"
-    = link_to 'Delete', remove_item_order_items_path(item_id: book_id)
-= link_to 'Clear', clear_order_items_path
+      Price: #{order_item_price(qty, book_id)}"
+    = link_to 'x', remove_item_order_items_path(item_id: book_id)
+- unless @cart.empty?
+  %br= t("cart.subtotal") + " #{number_to_currency subtotal(@cart)}"
+  = link_to t('cart.empty_cart'), clear_order_items_path

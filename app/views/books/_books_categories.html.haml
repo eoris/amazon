@@ -9,7 +9,7 @@
             .caption
               %h4.text-center.books-title= link_to truncate(book.title, length: 50), book
               %p.books-description{:align => "justify"}= truncate(book.description, length: 100)
-            %h4.text-center.price= number_to_currency book.price
+              %h4.text-center.price= number_to_currency book.price
     .text-center
       = paginate @books
       = page_entries_info @books
