@@ -1,10 +1,11 @@
 class OrderItemsController < ApplicationController
   def index
-    @cart = summarized_merge(cart)
+    @cart = OrderItem.summarized_merge(cart)
+    byebug
   end
 
   def create
-    cart << {order_item_params[:book_id] => order_item_params[:quantity]}
+    cart << {params[:order_item][:book_id] => params[:order_item][:quantity]}
     redirect_to :back
   end
 
@@ -20,21 +21,8 @@ class OrderItemsController < ApplicationController
 
   private
 
-    def summarized_merge(cart)
-      hash = Hash.new(0)
-        cart.each do |cart_hash|
-          cart_hash.each do |key, value|
-            hash[key] += value.to_i
-          end
-        end
-      hash
-    end
-
-    def order_item_params
-      params.require(:order_item).permit(:quantity, :book_id)
-    end
-
     def cart
      session[:cart] ||= []
     end
+
 end
