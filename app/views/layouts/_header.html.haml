@@ -14,7 +14,7 @@
             %a{:href => "/books"}= t('header.shop')
         %ul.nav.navbar-nav.navbar-right
           %li
-            = link_to(cart_path) do
+            = link_to(carts_path) do
               %span.glyphicon.glyphicon-shopping-cart
               = t('header.cart') + " (#{cart_count})"
           - if customer_signed_in?
