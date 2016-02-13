@@ -5,7 +5,7 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    cart << {params[:order_item][:book_id] => params[:order_item][:quantity]}
+    cart << {params[:book][:book_id] => params[:book][:quantity]}
     redirect_to :back
   end
 
