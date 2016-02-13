@@ -62,6 +62,8 @@ en:
         update: "Update"
         unhappy: "Unhappy"
         back: "Back"
+        billing_address: "Billing Address"
+        shippin_address: "Shipping Address"
       new:
         sign_up: "Sign up"
         or: "or"

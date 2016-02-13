@@ -69,3 +69,14 @@ en:
     continue_shoping: 'CONTINUE SHOPING'
     coupon_code: 'Coupon code'
     your_cart_empty: 'Your shopping cart is empty'
+  settings:
+    customer: "Edit Customer"
+    billing_address: "Billing Address"
+    shippin_address: "Shipping Address"
+    are_you_sure: "Are you sure?"
+    cancel_my_account: "Cancel my account"
+    leave_blank_if_you_don_t_want_to_change_it: "leave blank if you don't want to change it"
+    title: "Edit %{resource}"
+    we_need_your_current_password_to_confirm_your_changes: "we need your current password to confirm your changes"
+    update: "Update"
+    unhappy: "Unhappy"

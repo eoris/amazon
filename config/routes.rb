@@ -17,6 +17,13 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
+
+  resources :settings, only: [:index] do
+    collection do
+      put 'update_billing_address'
+      put 'update_shipping_address'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
