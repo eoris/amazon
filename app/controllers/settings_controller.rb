@@ -3,14 +3,14 @@ class SettingsController < ApplicationController
   def index
     @customer = current_customer
     @countries = Country.all
-    @billing_address = Address.find_or_initialize_by(customer_id: @customer.id, type: "BillingAddress")
-    @shipping_address = Address.find_or_initialize_by(customer_id: @customer.id, type: "ShippingAddress")
+    @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
+    @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
   end
 
   def update_billing_address
-    @billing_address = Address.find_or_create_by(customer_id: current_customer.id, type: "BillingAddress")
+    @billing_address = BillingAddress.find_or_create_by(customer_id: current_customer.id)
     if @billing_address.update(billing_address_params)
-      redirect_to :back
+      redirect_to :back, notice: "Billing address is updated"
     else
       redirect_to :back
       flash[:error] = "Please fill in all of the required fields"
@@ -18,9 +18,9 @@ class SettingsController < ApplicationController
   end
 
     def update_shipping_address
-    @shipping_address = Address.find_or_create_by(customer_id: current_customer.id, type: "ShippingAddress")
+    @shipping_address = ShippingAddress.find_or_create_by(customer_id: current_customer.id)
     if @shipping_address.update(shipping_address_params)
-      redirect_to :back
+      redirect_to :back, notice: "Shipping address is updated"
     else
       redirect_to :back
       flash[:error] = "Please fill in all of the required fields"
