@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
   devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
   devise_scope :customers do
-    get 'customer/settings', :to => 'settings#index'
+    get 'customer/settings', :to => 'settings#edit'
+    patch 'customer/update_personal_data', :to => 'settings#update_personal_data'
+    patch 'customer/update_password', :to => 'settings#update_password'
     put 'customer/update_billing_address', :to => 'settings#update_billing_address'
     put 'customer/update_shipping_address', :to => 'settings#update_shipping_address'
   end

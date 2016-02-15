@@ -70,7 +70,8 @@ en:
     coupon_code: 'Coupon code'
     your_cart_empty: 'Your shopping cart is empty'
   settings:
-    customer: "Edit Customer"
+    customer: "Edit Personal Data"
+    password: "Edit Password"
     billing_address: "Billing Address"
     shippin_address: "Shipping Address"
     are_you_sure: "Are you sure?"
