@@ -1,1 +1,3 @@
-class ShippingAddress < Address; end
+class ShippingAddress < Address
+  belongs_to :order
+end

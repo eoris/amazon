@@ -1,0 +1,31 @@
+.container
+  .row
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          %h4= t('settings.billing_address', :default => "Billing Address")
+        .panel-body
+          = simple_form_for @billing_address, url: customer_update_billing_address_path, :html => { :method => :put } do |f|
+            = f.input :firstname
+            = f.input :lastname
+            = f.input :address
+            = f.input :city
+            = f.input :country_id, collection: @countries
+            = f.input :zipcode
+            = f.input :phone
+            / = f.submit t('settings.update', :default => "Update"), class: "btn btn-primary"
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          %h4= t('settings.shippin_address', :default => "Shipping Address")
+        .panel-body
+          = simple_form_for @shipping_address, url: customer_update_shipping_address_path, :html => { :method => :put } do |f|
+            = f.input :firstname
+            = f.input :lastname
+            = f.input :address
+            = f.input :city
+            = f.input :country_id, collection: @countries
+            = f.input :zipcode
+            = f.input :phone
+            / = f.submit t('settings.update', :default => "Update"), class: "btn btn-primary"
+    .col-md-4

@@ -21,7 +21,7 @@
             %li
               %a{:href => "#"}= t('header.orders')
             %li
-              = link_to(t('header.settings'), customer_settings_path)
+              = link_to(t('header.settings'), edit_customer_path)
             %li
               = link_to(t('header.sign_out'), destroy_customer_session_path, :method => :delete, class: "btn btn-default navbar-btn")
           - else

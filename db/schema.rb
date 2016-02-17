@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213193818) do
+ActiveRecord::Schema.define(version: 20160217080241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,10 @@ ActiveRecord::Schema.define(version: 20160213193818) do
     t.string   "firstname",   null: false
     t.string   "lastname",    null: false
     t.string   "type",        null: false
+    t.integer  "order_id"
   end
+
+  add_index "addresses", ["order_id"], name: "index_addresses_on_order_id", using: :btree
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -150,4 +153,5 @@ ActiveRecord::Schema.define(version: 20160213193818) do
     t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "addresses", "orders"
 end

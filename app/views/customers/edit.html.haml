@@ -5,7 +5,7 @@
         .panel-heading
           %h4= t('settings.customer', :default => "Edit Personal Data")
         .panel-body
-          = simple_form_for(@customer, :as => :customer, :url => customer_update_personal_data_path, :html => { :method => :patch }) do |f|
+          = simple_form_for(@customer, :as => :customer, :url => update_personal_data_customer_path, :html => { :method => :patch }) do |f|
             = f.input :firstname, autofocus: true, class: "form-control"
             = f.input :lastname, class: "form-control"
             = f.input :email, class: "form-control", required: true
@@ -14,7 +14,7 @@
         .panel-heading
           %h4= t('settings.password', :default => "Edit Password")
         .panel-body
-          = simple_form_for(@customer, :as => :customer, :url => customer_update_password_path, :html => { :method => :patch }) do |f|
+          = simple_form_for(@customer, :as => :customer, :url => update_password_customer_path, :html => { :method => :patch }) do |f|
             = f.input :password, :autocomplete => "off", class: "form-control"
             = f.input :password_confirmation, class: "form-control"
             = f.input :current_password, class: "form-control"
@@ -27,7 +27,7 @@
         .panel-heading
           %h4= t('settings.billing_address', :default => "Billing Address")
         .panel-body
-          = simple_form_for @billing_address, url: customer_update_billing_address_path, :html => { :method => :put } do |f|
+          = simple_form_for @billing_address, url: update_billing_address_customer_path, :html => { :method => :put } do |f|
             = f.input :firstname
             = f.input :lastname
             = f.input :address
@@ -41,7 +41,7 @@
         .panel-heading
           %h4= t('settings.shippin_address', :default => "Shipping Address")
         .panel-body
-          = simple_form_for @shipping_address, url: customer_update_shipping_address_path, :html => { :method => :put } do |f|
+          = simple_form_for @shipping_address, url: update_shipping_address_customer_path, :html => { :method => :put } do |f|
             = f.input :firstname
             = f.input :lastname
             = f.input :address

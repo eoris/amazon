@@ -1,4 +1,4 @@
-class SettingsController < ApplicationController
+class CustomersController < ApplicationController
 
 before_action :authenticate_customer!
 
@@ -7,8 +7,8 @@ ERROR  = "Please fill in all of the required fields"
   def edit
     @customer = current_customer
     @countries = Country.all
-    @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
-    @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
+    @billing_address = Address.find_or_init_billing_address(@customer)
+    @shipping_address = Address.find_or_init_shipping_address(@customer)
   end
 
   def update_personal_data
