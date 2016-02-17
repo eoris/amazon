@@ -19,7 +19,7 @@
               = t('header.cart') + " (#{cart_count})"
           - if customer_signed_in?
             %li
-              %a{:href => "#"}= t('header.orders')
+              = link_to(t('header.orders'), orders_path)
             %li
               = link_to(t('header.settings'), edit_customer_path)
             %li

@@ -5,7 +5,7 @@
         .panel-heading
           %h4= t('settings.billing_address', :default => "Billing Address")
         .panel-body
-          = simple_form_for @billing_address, url: customer_update_billing_address_path, :html => { :method => :put } do |f|
+          = simple_form_for @billing_address, url: update_billing_address_customer_path, :html => { :method => :put } do |f|
             = f.input :firstname
             = f.input :lastname
             = f.input :address
@@ -19,7 +19,7 @@
         .panel-heading
           %h4= t('settings.shippin_address', :default => "Shipping Address")
         .panel-body
-          = simple_form_for @shipping_address, url: customer_update_shipping_address_path, :html => { :method => :put } do |f|
+          = simple_form_for @shipping_address, url: update_shipping_address_customer_path, :html => { :method => :put } do |f|
             = f.input :firstname
             = f.input :lastname
             = f.input :address

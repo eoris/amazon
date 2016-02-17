@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       delete  'clear'
     end
   end
-  resources :orders, only: [:index, :show] do
+  resources :orders, only: [:index, :show, :create] do
     collection do
       get   'address'
       patch 'update_billing_address'
