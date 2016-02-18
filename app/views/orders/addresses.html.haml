@@ -1,0 +1,31 @@
+.container
+  .row
+  = simple_form_for(:address, url: wizard_path, :method => :put) do |a|
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          %h4= t('settings.billing_address', :default => "Billing Address")
+        .panel-body
+          = a.simple_fields_for @billing_address do |ba|
+            = ba.input :firstname
+            = ba.input :lastname
+            = ba.input :address
+            = ba.input :city
+            = ba.input :country_id, collection: @countries
+            = ba.input :zipcode
+            = ba.input :phone
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          %h4= t('settings.shippin_address', :default => "Shipping Address")
+        .panel-body
+          = a.simple_fields_for @shipping_address do |sa|
+            = sa.input :firstname
+            = sa.input :lastname
+            = sa.input :address
+            = sa.input :city
+            = sa.input :country_id, collection: @countries
+            = sa.input :zipcode
+            = sa.input :phone
+    .col-md-4
+    = a.submit

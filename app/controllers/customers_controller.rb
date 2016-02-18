@@ -1,54 +1,51 @@
 class CustomersController < ApplicationController
 
 before_action :authenticate_customer!
-
-ERROR  = "Please fill in all of the required fields"
+before_action :customer_init
+before_action :addresses_init, :except => [:edit]
 
   def edit
-    @customer = current_customer
     @countries = Country.all
     @billing_address = Address.find_or_init_billing_address(@customer)
     @shipping_address = Address.find_or_init_shipping_address(@customer)
   end
 
   def update_personal_data
-    @customer = Customer.find(current_customer.id)
     if @customer.update(customer_personal_data_params)
-      redirect_to :back, notice: "Your personal data updated"
+      flash[:notice] = "Your personal data updated"
+      redirect_to edit_customer_path
     else
-      redirect_to :back
-      flash[:error] = ERROR
+      render 'edit'
     end
   end
 
   def update_password
-    @customer = Customer.find(current_customer.id)
     if @customer.update_with_password(customer_params)
       sign_in @customer, :bypass => true
-      redirect_to :back, notice: "Password Changed"
+      flash[:notice] = "Password Changed"
+      redirect_to edit_customer_path
     else
-      redirect_to :back
-      flash[:error] = ERROR
+      render 'edit'
     end
   end
 
   def update_billing_address
     @billing_address = BillingAddress.find_or_create_by(customer_id: current_customer.id)
     if @billing_address.update(billing_address_params)
-      redirect_to :back, notice: "Billing address is updated"
+      flash[:notice] = "Billing address is updated"
+      redirect_to edit_customer_path
     else
-      redirect_to :back
-      flash[:error] = ERROR
+      render 'edit'
     end
   end
 
   def update_shipping_address
     @shipping_address = ShippingAddress.find_or_create_by(customer_id: current_customer.id)
     if @shipping_address.update(shipping_address_params)
-      redirect_to :back, notice: "Shipping address is updated"
+      flash[:notice] = "Shipping address is updated"
+      redirect_to edit_customer_path
     else
-      redirect_to :back
-      flash[:error] = ERROR
+      render 'edit'
     end
   end
 
@@ -56,6 +53,15 @@ ERROR  = "Please fill in all of the required fields"
   end
 
   private
+
+    def customer_init
+      @customer = current_customer
+    end
+
+    def addresses_init
+      @billing_address = BillingAddress.find_or_create_by(customer_id: current_customer.id)
+      @shipping_address = ShippingAddress.find_or_create_by(customer_id: current_customer.id)
+    end
 
     def customer_personal_data_params
       params.require(:customer).permit(:firstname, :lastname, :email)
