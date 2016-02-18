@@ -17,4 +17,8 @@ class OrderItem < ActiveRecord::Base
       end
     hash
   end
+
+  def self.params_valid?(params)
+    params.each_value { |v| v.to_i >= 1 }
+  end
 end

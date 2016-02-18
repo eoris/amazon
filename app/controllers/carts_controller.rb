@@ -5,8 +5,12 @@ class CartsController < ApplicationController
   end
 
   def add_item
-    cart << {params[:book][:book_id] => params[:book][:quantity]}
-    redirect_to :back
+    if OrderItem.params_valid?(cart_params)
+      cart << {cart_params[:book_id] => cart_params[:quantity]}
+      redirect_to :back
+    else
+      redirect_to :back
+    end
   end
 
   def remove_item
@@ -23,6 +27,10 @@ class CartsController < ApplicationController
 
     def cart
      session[:cart] ||= []
+    end
+
+    def cart_params
+      params.require(:book).permit(:book_id, :quantity)
     end
 
 end
