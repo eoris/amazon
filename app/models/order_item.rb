@@ -19,6 +19,6 @@ class OrderItem < ActiveRecord::Base
   end
 
   def self.params_valid?(params)
-    params.values.all? { |v| v.to_i >= 1}
+    params.values.all? { |v| v.to_i >= 1 }
   end
 end

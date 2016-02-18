@@ -17,6 +17,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 # Use Simple form
 gem 'simple_form'
+# Use Wicked
+gem 'wicked'
 # Use Rails Admin
 gem 'rails_admin'
 # Use Bootstrap
