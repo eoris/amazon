@@ -18,6 +18,19 @@ class OrderItem < ActiveRecord::Base
     hash
   end
 
+  def self.create_order_items(cart)
+    hash = self.summarized_merge(cart)
+    order_items = hash.each_pair do |k, v|
+      self.create(book_id: k,
+                  price: (Book.find_by_id(k).price) * v,
+                  quantity: v)
+    end
+  end
+
+  def self.subtotal(order_items)
+    order_items.map {|i| i.price}.reduce(:+)
+  end
+
   def self.params_valid?(params)
     params.values.all? { |v| v.to_i >= 1 }
   end
