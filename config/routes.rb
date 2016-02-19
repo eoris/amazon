@@ -2,12 +2,7 @@ Rails.application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
   devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
-  resource :customer, only: [:edit] do
-    patch 'update_personal_data'
-    patch 'update_password'
-    put   'update_billing_address'
-    put   'update_shipping_address'
-  end
+  resource :customer, only: [:edit, :update]
   root 'books#bestsellers'
   resources :books, only: [:index, :show] do
     resources :ratings, only: [:new, :create]
@@ -22,6 +17,7 @@ Rails.application.routes.draw do
       delete  'clear'
     end
   end
+  resources :orders, only: [:index, :create, :show, :update]
   # resources :orders, only: [:index, :create, :show, :update] do
   #   collection do
   #     get   'address'
@@ -35,7 +31,6 @@ Rails.application.routes.draw do
   #     post  'confirm'
   #   end
   # end
-  resources :orders, only: [:index, :create, :show, :update]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
