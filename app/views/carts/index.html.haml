@@ -7,5 +7,5 @@
       Price: #{order_item_price(qty, book_id)}"
     = link_to('x', remove_item_carts_path(item_id: book_id), method: :delete)
 - unless @cart.empty?
-  %br= t("cart.subtotal") + " #{number_to_currency subtotal(@cart)}"
+  %br= t("cart.subtotal") + " #{number_to_currency @subtotal}"
   = link_to(t('cart.empty_cart'), clear_carts_path, method: :delete)
