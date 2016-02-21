@@ -1,6 +1,6 @@
 module CartsHelper
   def order_item_book(book_id)
-    Book.find_by(id: book_id.to_i)
+    Book.find_by_id(book_id)
   end
 
   def order_item_price(qty, book_id)

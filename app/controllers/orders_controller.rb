@@ -2,16 +2,24 @@ class OrdersController < ApplicationController
   include Wicked::Wizard
 
   before_action :authenticate_customer!
+  before_action :customer_init
 
   steps :addresses, :delivery, :payment, :overview
 
   def index
-    @customer = current_customer
     @orders = @customer.orders
   end
 
+  def create
+    @order_items = OrderItem.create_order_items_from_cart(session[:cart])
+    @order = @customer.orders.build
+    @order.total_price = Order.total_price_(@order_items)
+    @order.completed_date = Time.now
+    @order.save
+    @order.order_items << @order_items
+  end
+
   def show
-    @customer = current_customer
     case step
     when :addresses
       @countries = Country.all
@@ -22,7 +30,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @customer = current_customer
     case step
     when :addresses
       @billing_address = BillingAddress.find_or_create_by(customer_id: current_customer.id)
@@ -34,6 +41,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+    def customer_init
+      @customer = current_customer
+    end
 
     def address_params
       params.require(:address).permit(:firstname, :lastname, :address,
