@@ -9,3 +9,5 @@
 - unless @cart.empty?
   %br= t("cart.subtotal") + " #{number_to_currency @subtotal}"
   = link_to(t('cart.empty_cart'), clear_carts_path, method: :delete)
+  %br
+  %br= link_to("CHECKOUT", orders_path, method: :post)

@@ -1,8 +1,8 @@
 class CartsController < ApplicationController
 
   def index
-    @cart = cart.summarized_merge
-    @subtotal = cart.subtotal(@cart)
+    @cart = cart.session
+    @subtotal = cart.subtotal
   end
 
   def add_item
@@ -23,7 +23,7 @@ class CartsController < ApplicationController
   private
 
     def cart
-      Cart.new(session[:cart] ||= [])
+      Cart.new(session[:cart] ||= {})
     end
 
     def cart_params

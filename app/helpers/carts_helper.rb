@@ -8,7 +8,7 @@ module CartsHelper
   end
 
   def total_items_quantity
-    session[:cart].map {|hash| hash.values}.flatten.map(&:to_i).reduce(:+)
+    session[:cart].each_value.reduce(:+)
   end
 
   def cart_count

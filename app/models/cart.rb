@@ -7,7 +7,7 @@ class Cart
   end
 
   def remove_item_from_cart(item_id)
-    @session.delete_if {|item| item.keys.include?(item_id)}
+    @session.delete(item_id)
   end
 
   def params_valid?(params)
@@ -16,23 +16,19 @@ class Cart
 
   def add_item_to_cart(cart_params)
     if params_valid?(cart_params)
-      @session << {cart_params[:book_id] => cart_params[:quantity]}
+      if @session.key?(cart_params[:book_id])
+        @session[cart_params[:book_id]] += cart_params[:quantity].to_i
+      else
+        @session[cart_params[:book_id]] = cart_params[:quantity].to_i
+      end
     end
   end
 
-  def summarized_merge
-    hash = Hash.new(0)
-      @session.each do |cart_hash|
-        cart_hash.each do |key, value|
-          hash[key] += value.to_i
-        end
-      end
-    hash
-  end
-
-  def subtotal(cart_hash)
-    cart_hash.map do |key, value|
-      Book.find_by(id: key).price * value
-    end.reduce(:+)
+  def subtotal
+    @subtotal = 0
+    @session.each_pair do |key, value|
+      @subtotal += Book.find_by_id(key).price * value
+    end
+    @subtotal
   end
 end
