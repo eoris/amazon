@@ -12,11 +12,7 @@ class OrdersController < ApplicationController
 
   def create
     @order_items = OrderItem.create_order_items_from_cart(session[:cart])
-    @order = @customer.orders.build
-    @order.total_price = Order.total_price_(@order_items)
-    @order.completed_date = Time.now
-    @order.save
-    @order.order_items << @order_items
+    @order       = Order.create_order(@customer, @order_items)
   end
 
   def show
