@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   def create
     @order_items = OrderItem.create_order_items_from_cart(session[:cart])
     @order       = Order.create_order(@customer, @order_items)
+    session[:cart] = nil
     redirect_to order_addresses_path(@order)
   end
 
@@ -19,10 +20,10 @@ class OrdersController < ApplicationController
   end
 
   def create_addresses
-    @billing  = @customer.addresses.order(params[:order_id]).build(billing_params)
-    @billing.type = 'BillingAddress'
-    @shipping = @customer.addresses.order(params[:order_id]).build(shipping_params)
-    @shipping.type = 'ShippingAddress'
+    @billing  = Address.build_billing(@customer, @order,
+                                      addresses_params[:billing_address])
+    @shipping = Address.build_shipping(@customer, @order,
+                                      addresses_params[:shipping_address])
     if @billing.save && @shipping.save
       redirect_to order_delivery_path
     else
@@ -46,12 +47,12 @@ class OrdersController < ApplicationController
       @shipping_address = Address.find_or_init_shipping_address(@customer)
     end
 
-    def billing_params
-      params.require(:addresses).permit(billing_address: [:firstname, :lastname, :address, :city, :country_id, :country, :zipcode, :phone])
-    end
-
-    def shipping_params
-      params.require(:addresses).permit(shipping_address:
+    def addresses_params
+      params.require(:addresses).permit(billing_address:
+                                              [:firstname, :lastname,
+                                               :address, :city, :country_id,
+                                               :country, :zipcode, :phone],
+                                        shipping_address:
                                               [:firstname, :lastname,
                                                :address, :city, :country_id,
                                                :country, :zipcode, :phone])
