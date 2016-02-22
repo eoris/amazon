@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :customer_init
+  before_action :set_customer
   before_action :addresses_init
 
   def edit
@@ -27,7 +27,7 @@ class CustomersController < ApplicationController
 
   private
 
-    def customer_init
+    def set_customer
       @customer = current_customer
     end
 

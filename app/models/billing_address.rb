@@ -1,1 +1,3 @@
-class BillingAddress < Address; end
+class BillingAddress < Address
+  belongs_to :order
+end

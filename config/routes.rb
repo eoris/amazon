@@ -17,20 +17,17 @@ Rails.application.routes.draw do
       delete  'clear'
     end
   end
-  resources :orders, only: [:index, :create, :show, :update]
-  # resources :orders, only: [:index, :create, :show, :update] do
-  #   collection do
-  #     get   'address'
-  #     patch 'update_billing_address'
-  #     post  'create_shipping_address'
-  #     get   'delivery'
-  #     post  'create_delivery'
-  #     get   'payment'
-  #     post  'create_payment'
-  #     get   'overview'
-  #     post  'confirm'
-  #   end
-  # end
+  # resources :orders, only: [:index, :create, :show, :update]
+  resources :orders, only: [:index, :create, :show, :update] do
+    get   'addresses'
+    put  'create_addresses'
+    get   'delivery'
+    post  'create_delivery'
+    get   'payment'
+    post  'create_payment'
+    get   'overview'
+    post  'confirm'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -17,5 +17,6 @@ class Order < ActiveRecord::Base
     order.completed_date = Time.now
     order.save
     order.order_items << order_items
+    order
   end
 end
