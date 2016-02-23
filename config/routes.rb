@@ -17,12 +17,11 @@ Rails.application.routes.draw do
       delete  'clear'
     end
   end
-  # resources :orders, only: [:index, :create, :show, :update]
   resources :orders, only: [:index, :create, :show, :update] do
     get   'addresses'
-    put  'create_addresses'
+    put   'create_addresses'
     get   'delivery'
-    post  'create_delivery'
+    patch 'create_delivery'
     get   'payment'
     post  'create_payment'
     get   'overview'

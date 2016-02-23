@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217080241) do
+ActiveRecord::Schema.define(version: 20160223133602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,6 @@ ActiveRecord::Schema.define(version: 20160217080241) do
     t.integer  "cvv"
     t.integer  "expiration_month"
     t.integer  "expiration_year"
-    t.string   "firstname"
-    t.string   "lastname"
     t.integer  "customer_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -125,6 +123,13 @@ ActiveRecord::Schema.define(version: 20160217080241) do
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string   "title",                              null: false
+    t.decimal  "price",      precision: 5, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.decimal  "price",      precision: 9, scale: 2, null: false
     t.integer  "quantity",                           null: false
@@ -142,6 +147,7 @@ ActiveRecord::Schema.define(version: 20160217080241) do
     t.integer  "customer_id"
     t.datetime "created_at",                                                     null: false
     t.datetime "updated_at",                                                     null: false
+    t.integer  "delivery_id"
   end
 
   create_table "ratings", force: :cascade do |t|

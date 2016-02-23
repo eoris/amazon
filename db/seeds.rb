@@ -56,6 +56,8 @@ Book.create([
   { title: "Metaprogramming Ruby: Program Like the Ruby Pros", description: "Everyone in the Ruby world seems to be talking about metaprogramming--how you can use it to remove duplication in your code and write elegant, beautiful programs. Now you can get in on the action as well. This book describes metaprogramming as an essential component of Ruby. Once you understand the principles of Ruby, including the object model, scopes, and eigenclasses, you're on your way to applying metaprogramming both in your daily work and in your fun, after-hours projects.", price: 27.45, quantity_in_stock: 5, category_id: 3, author_ids: [10] }
   ])
 
+Delivery.create([{title: 'UPS Ground', price: 5}, {title: 'UPS Two Day', price: 10}, {title: 'UPS One Day', price: 15}])
+
 
 
 

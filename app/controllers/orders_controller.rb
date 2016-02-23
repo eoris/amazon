@@ -31,6 +31,27 @@ class OrdersController < ApplicationController
     end
   end
 
+  def delivery
+    @deliveries = Delivery.all.reverse
+  end
+
+  def create_delivery
+    if @customer.id == @order.customer_id
+      @order.update(delivery_params)
+      redirect_to order_payment_path
+    else
+      render 'delivery'
+    end
+  end
+
+  def payment
+    @credit_card = CreditCard.new
+  end
+
+  def create_payment
+
+  end
+
   private
 
     def set_customer
@@ -57,5 +78,9 @@ class OrdersController < ApplicationController
       params.require(:shipping_address).permit(:firstname, :lastname,
                                                :address, :city, :country_id,
                                                :country, :zipcode, :phone)
+    end
+
+    def delivery_params
+      params.require(:order).permit(:delivery_id)
     end
 end
