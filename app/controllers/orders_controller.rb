@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   before_action :authenticate_customer!
   before_action :set_customer
-  before_action :addresses_init, only: [:addresses, :create_addresses]
+  before_action :addresses_init, only: [:addresses]
   before_action :find_order, except: [:index, :create]
 
   def index
@@ -20,11 +20,11 @@ class OrdersController < ApplicationController
   end
 
   def create_addresses
-    @billing  = Address.build_billing(@customer, @order,
-                                      addresses_params[:billing_address])
-    @shipping = Address.build_shipping(@customer, @order,
-                                      addresses_params[:shipping_address])
-    if @billing.save && @shipping.save
+    @billing_address  = Address.build_billing(@customer, @order,
+                                      billing_params)
+    @shipping_address = Address.build_shipping(@customer, @order,
+                                      shipping_params)
+    if @billing_address.save && @shipping_address.save
       redirect_to order_delivery_path
     else
       render 'addresses'
@@ -47,14 +47,15 @@ class OrdersController < ApplicationController
       @shipping_address = Address.find_or_init_shipping_address(@customer)
     end
 
-    def addresses_params
-      params.require(:addresses).permit(billing_address:
-                                              [:firstname, :lastname,
+    def billing_params
+      params.require(:billing_address).permit(:firstname, :lastname,
                                                :address, :city, :country_id,
-                                               :country, :zipcode, :phone],
-                                        shipping_address:
-                                              [:firstname, :lastname,
+                                               :country, :zipcode, :phone)
+    end
+
+    def shipping_params
+      params.require(:shipping_address).permit(:firstname, :lastname,
                                                :address, :city, :country_id,
-                                               :country, :zipcode, :phone])
+                                               :country, :zipcode, :phone)
     end
 end

@@ -6,27 +6,27 @@
         .panel-heading
           %h4= t('settings.billing_address', :default => "Billing Address")
         .panel-body
-          = a.simple_fields_for @billing_address do |ba|
-            = ba.input :firstname
-            = ba.input :lastname
-            = ba.input :address
-            = ba.input :city
-            = ba.input :country_id, collection: @countries
-            = ba.input :zipcode
-            = ba.input :phone
+          = simple_fields_for @billing_address do |ba|
+            = ba.input :firstname, input_html: { name: 'billing_address[firstname]' }
+            = ba.input :lastname, input_html: { name: 'billing_address[lastname]' }
+            = ba.input :address, input_html: { name: 'billing_address[address]' }
+            = ba.input :city, input_html: { name: 'billing_address[city]' }
+            = ba.input :country_id, collection: @countries, input_html: { name: 'billing_address[country_id]' }
+            = ba.input :zipcode, input_html: { name: 'billing_address[zipcode]' }
+            = ba.input :phone, input_html: { name: 'billing_address[phone]' }
     .col-md-4
       .panel.panel-default
         .panel-heading
           %h4= t('settings.shippin_address', :default => "Shipping Address")
         .panel-body
-          = a.simple_fields_for @shipping_address do |sa|
-            = sa.input :firstname
-            = sa.input :lastname
-            = sa.input :address
-            = sa.input :city
-            = sa.input :country_id, collection: @countries
-            = sa.input :zipcode
-            = sa.input :phone
+          = simple_fields_for @shipping_address do |sa|
+            = sa.input :firstname, input_html: { name: 'shipping_address[firstname]' }
+            = sa.input :lastname, input_html: { name: 'shipping_address[lastname]' }
+            = sa.input :address, input_html: { name: 'shipping_address[address]' }
+            = sa.input :city, input_html: { name: 'shipping_address[city]' }
+            = sa.input :country_id, collection: @countries, input_html: { name: 'shipping_address[country_id]' }
+            = sa.input :zipcode, input_html: { name: 'shipping_address[zipcode]' }
+            = sa.input :phone, input_html: { name: 'shipping_address[phone]' }
     .col-md-4
     .col-md-12
       = a.submit
