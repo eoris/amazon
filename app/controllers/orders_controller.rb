@@ -2,28 +2,21 @@ class OrdersController < ApplicationController
 
   before_action :authenticate_customer!
   before_action :set_customer
-  before_action :addresses_init, only: [:addresses]
+  before_action :addresses_init, only: [:addresses, :create_addresses]
   before_action :find_order, except: [:index, :create]
 
   def index
     @orders = @customer.orders
   end
 
-  def create
-    @order_items = OrderItem.create_order_items_from_cart(session[:cart])
-    @order       = Order.create_order(@customer, @order_items)
-    session[:cart] = nil
-    redirect_to order_addresses_path(@order)
-  end
-
   def addresses
   end
 
   def create_addresses
-    @billing_address  = Address.build_billing(@customer, @order,
-                                      billing_params)
-    @shipping_address = Address.build_shipping(@customer, @order,
-                                      shipping_params)
+    @billing_address = @order.build_billing_address(billing_params)
+    @billing_address.customer = @customer
+    @shipping_address = @order.build_shipping_address(shipping_params)
+    @shipping_address.customer = @customer
     if @billing_address.save && @shipping_address.save
       redirect_to order_delivery_path
     else
@@ -32,10 +25,10 @@ class OrdersController < ApplicationController
   end
 
   def delivery
-    @deliveries = Delivery.all.reverse
+    @deliveries = Delivery.all
   end
 
-  def create_delivery
+  def update_delivery
     if @customer.id == @order.customer_id
       @order.update(delivery_params)
       redirect_to order_payment_path
@@ -64,8 +57,8 @@ class OrdersController < ApplicationController
 
     def addresses_init
       @countries = Country.all
-      @billing_address = Address.find_or_init_billing_address(@customer)
-      @shipping_address = Address.find_or_init_shipping_address(@customer)
+      @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
+      @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
     end
 
     def billing_params

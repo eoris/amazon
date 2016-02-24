@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-4
-      = simple_form_for @order, url: order_create_delivery_path(@order), method: :patch do |f|
+      = simple_form_for @order, url: order_update_delivery_path(@order), method: :patch do |f|
         - @deliveries.each do |d|
           .radio
           = f.radio_button :delivery_id, d.id, checked: d == @order.delivery || d == @deliveries.first

@@ -33,8 +33,8 @@ class CustomersController < ApplicationController
 
     def addresses_init
       @countries = Country.all
-      @billing_address = Address.find_or_init_billing_address(@customer)
-      @shipping_address = Address.find_or_init_shipping_address(@customer)
+      @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
+      @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
     end
 
     def customer_params

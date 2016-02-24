@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
   resources :order_items
-  resources :carts, only: [:index] do
+  resource :cart, only: [:show] do
     collection do
       post    'add_item'
       delete  'remove_item'
+      post    'checkout'
       delete  'clear'
     end
   end
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
     get   'addresses'
     put   'create_addresses'
     get   'delivery'
-    patch 'create_delivery'
+    patch 'update_delivery'
     get   'payment'
     post  'create_payment'
     get   'overview'

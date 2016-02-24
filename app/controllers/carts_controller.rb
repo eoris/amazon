@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
-
-  def index
+  def show
     @cart = cart.session
     @subtotal = cart.subtotal
   end
@@ -20,6 +19,16 @@ class CartsController < ApplicationController
     redirect_to :back
   end
 
+  def checkout
+    @order = cart.build_order(current_customer)
+    if !cart.session.empty? && @order.save
+      session[:cart] = nil
+      redirect_to order_addresses_path(@order)
+    else
+      redirect_to :back
+    end
+  end
+
   private
 
     def cart
@@ -29,5 +38,4 @@ class CartsController < ApplicationController
     def cart_params
       params.require(:book).permit(:book_id, :quantity)
     end
-
 end

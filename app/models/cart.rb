@@ -1,5 +1,4 @@
 class Cart
-
   attr_accessor :session
 
   def initialize(session)
@@ -24,10 +23,29 @@ class Cart
     end
   end
 
+  def build_order_items_from_cart
+    return if @session.empty?
+    order_items = []
+    @session.each_pair do |k, v|
+      order_items << OrderItem.new(book_id: k,
+                                   price: Book.find(k).price * v,
+                                   quantity: v)
+    end
+    order_items
+  end
+
+  def build_order(customer)
+    return if @session.empty?
+    order_items = build_order_items_from_cart
+    order = customer.orders.new(total_price: subtotal, completed_date: Time.now)
+    order.order_items << order_items
+    order
+  end
+
   def subtotal
     @subtotal = 0
     @session.each_pair do |key, value|
-      @subtotal += Book.find_by_id(key).price * value
+      @subtotal += Book.find(key).price * value
     end
     @subtotal
   end
