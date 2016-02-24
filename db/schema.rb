@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223133602) do
+ActiveRecord::Schema.define(version: 20160224190414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,14 +92,17 @@ ActiveRecord::Schema.define(version: 20160223133602) do
   end
 
   create_table "credit_cards", force: :cascade do |t|
-    t.integer  "number"
+    t.integer  "number",           limit: 8
     t.integer  "cvv"
     t.integer  "expiration_month"
     t.integer  "expiration_year"
     t.integer  "customer_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "order_id"
   end
+
+  add_index "credit_cards", ["order_id"], name: "index_credit_cards_on_order_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "firstname",                           null: false
@@ -143,7 +146,6 @@ ActiveRecord::Schema.define(version: 20160223133602) do
     t.decimal  "total_price",    precision: 9, scale: 2,                         null: false
     t.datetime "completed_date",                                                 null: false
     t.string   "state",                                  default: "in progress", null: false
-    t.integer  "credit_card_id"
     t.integer  "customer_id"
     t.datetime "created_at",                                                     null: false
     t.datetime "updated_at",                                                     null: false
@@ -160,4 +162,5 @@ ActiveRecord::Schema.define(version: 20160223133602) do
   end
 
   add_foreign_key "addresses", "orders"
+  add_foreign_key "credit_cards", "orders"
 end
