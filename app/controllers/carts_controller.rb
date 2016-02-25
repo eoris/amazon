@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :authenticate_customer!
+  before_action :authenticate_customer!, only: [:checkout]
 
   def show
     @cart = cart.session
