@@ -16,8 +16,6 @@ class OrdersController < ApplicationController
   end
 
   def create_addresses
-    @billing_address.customer = @customer
-    @shipping_address.customer = @customer
     if @billing_address.update(billing_params) && @shipping_address.update(shipping_params)
       redirect_to order_delivery_path
     else
@@ -86,8 +84,13 @@ class OrdersController < ApplicationController
 
     def addresses_init
       @countries = Country.all
-      @billing_address = BillingAddress.find_or_initialize_by(order_id: @order.id)
-      @shipping_address = ShippingAddress.find_or_initialize_by(order_id: @order.id)
+      if @order.billing_address.nil? && @order.shipping_address.nil?
+        @billing_address = @order.billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
+        @shipping_address = @order.shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
+      else
+        @billing_address = BillingAddress.find_or_initialize_by(order_id: @order.id)
+        @shipping_address = ShippingAddress.find_or_initialize_by(order_id: @order.id)
+      end
     end
 
     def billing_params
