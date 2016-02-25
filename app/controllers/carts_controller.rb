@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  before_action :authenticate_customer!
+
   def show
     @cart = cart.session
     @subtotal = cart.subtotal
