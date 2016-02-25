@@ -25,8 +25,9 @@ Rails.application.routes.draw do
     patch 'update_delivery'
     get   'payment'
     post  'create_payment'
-    get   'overview'
-    get  'confirm'
+    get   'confirm'
+    post  'place'
+    get   'complete'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

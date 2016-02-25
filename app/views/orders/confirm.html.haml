@@ -1,0 +1,27 @@
+.container
+  .row
+    .col-md-12
+      %h4 CONFIRM
+    .col-md-3
+      %h5
+        Billing Address
+        = link_to('edit', order_addresses_path)
+      %p= "#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
+      %p="#{@order.billing_address.address}"
+      %p="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
+      %p="#{@order.billing_address.country.name}"
+      %p="#{@order.billing_address.phone}"
+    .col-md-3
+      %h5 Shipping Address
+      %br= @order.shipping_address
+    .col-md-3
+      %h5 Shipments
+      %br= @order.delivery
+    .col-md-3
+      %h5 Payment Information
+      %br= @order.credit_card.number
+      = "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
+    .col-md-12
+      = @order.order_items.map(&:book).map(&:title)
+    .col-md-12
+      %br= button_to 'PLACE ORDER', order_place_path, method: :post
