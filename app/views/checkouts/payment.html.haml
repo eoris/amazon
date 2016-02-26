@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-4
-      = simple_form_for @credit_card, url: order_create_payment_path, method: :post do |f|
+      = simple_form_for @credit_card, url: create_payment_order_checkout_path, method: :post do |f|
         = f.input :number
         %br
           = select_month(Date.today, use_month_numbers: true, prefix: 'credit_card', field_name: 'expiration_month')

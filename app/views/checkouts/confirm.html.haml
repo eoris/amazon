@@ -5,7 +5,7 @@
     .col-md-3
       %h5
         Billing Address
-        = link_to('edit', order_addresses_path)
+        = link_to('edit', addresses_order_checkout_path)
       %p= "#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
       %p="#{@order.billing_address.address}"
       %p="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
@@ -24,4 +24,4 @@
     .col-md-12
       = @order.order_items.map(&:book).map(&:title)
     .col-md-12
-      %br= button_to 'PLACE ORDER', order_place_path, method: :post
+      %br= button_to 'PLACE ORDER', place_order_checkout_path, method: :post

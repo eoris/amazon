@@ -25,7 +25,7 @@ class CartsController < ApplicationController
     @order = cart.build_order(current_customer)
     if !cart.session.empty? && @order.save
       session[:cart] = nil
-      redirect_to order_addresses_path(@order)
+      redirect_to addresses_order_checkout_path(@order)
     else
       redirect_to :back
     end

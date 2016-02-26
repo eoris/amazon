@@ -20,7 +20,6 @@ RSpec.describe Address, type: :model do
   it { is_expected.to validate_presence_of(:zipcode) }
   it { is_expected.to validate_presence_of(:city) }
   it { is_expected.to validate_presence_of(:phone) }
-  it { is_expected.to validate_presence_of(:customer_id) }
   it { is_expected.to validate_presence_of(:country_id) }
 
 end

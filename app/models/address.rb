@@ -3,5 +3,5 @@ class Address < ActiveRecord::Base
   belongs_to :country
   validates :firstname, :lastname,
             :address, :zipcode, :city, :phone,
-            :customer_id, :country_id, presence: true
+            :country_id, presence: true
 end
