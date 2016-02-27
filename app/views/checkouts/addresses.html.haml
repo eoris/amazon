@@ -2,7 +2,7 @@
   .row
   = simple_form_for(:addresses, url: create_addresses_order_checkout_path, :method => :put) do |a|
     .col-md-4
-      .panel.panel-default
+      .panel.panel-default.billing
         .panel-heading
           %h4= t('settings.billing_address', :default => "Billing Address")
         .panel-body
@@ -15,9 +15,12 @@
             = ba.input :zipcode
             = ba.input :phone
     .col-md-4
-      .panel.panel-default
+      .panel.panel-default.shipping
         .panel-heading
-          %h4= t('settings.shippin_address', :default => "Shipping Address")
+          %h4
+            = t('settings.shippin_address', :default => "Shipping Address")
+            = check_box("billing_to", "shipping", { id: 'shipping-checkbox' })
+            %em.small Use Billing Address
         .panel-body
           = simple_fields_for @shipping_address do |sa|
             = sa.input :firstname
@@ -29,4 +32,4 @@
             = sa.input :phone
     .col-md-4
     .col-md-12
-      = a.submit t("orders.save")
+      %br= a.submit t("orders.save")
