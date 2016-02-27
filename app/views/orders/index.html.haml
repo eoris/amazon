@@ -1,1 +1,16 @@
-= @orders.each(&:to_s)
+%h4
+  %b Order in progress
+- @orders_in_progress.each do |o|
+  .panel.panel-default.panel-body
+    - o.order_items.map do |oi|
+      %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+    = "SUBTOTAL: #{o.total_price}"
+
+%h4
+  %b Orders in queue
+- @orders_in_queue.each do |o|
+  .panel.panel-default.panel-body
+    - o.order_items.map do |oi|
+      %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+    = "TOTAL: #{o.total_price}"
+
