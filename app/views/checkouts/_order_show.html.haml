@@ -1,26 +1,37 @@
 .container
   .row
     .col-md-12
-      %h4 ORDER №
+      %h4= "ORDER №#{@order.id}"
     .col-md-3
       %h5
         Billing Address
-      %p= "#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
+      %p="#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
       %p="#{@order.billing_address.address}"
       %p="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
       %p="#{@order.billing_address.country.name}"
       %p="#{@order.billing_address.phone}"
     .col-md-3
-      %h5 Shipping Address
-      %br= @order.shipping_address
+      %h5
+        Shipping Address
+      %p="#{@order.shipping_address.firstname} #{@order.shipping_address.lastname}"
+      %p="#{@order.shipping_address.address}"
+      %p="#{@order.shipping_address.city} #{@order.shipping_address.zipcode}"
+      %p="#{@order.shipping_address.country.name}"
+      %p="#{@order.shipping_address.phone}"
     .col-md-3
-      %h5 Shipments
-      %br= @order.delivery
+      %h5
+        Shipments
+      %br= @order.delivery.title
+      %br= @order.delivery.price
     .col-md-3
-      %h5 Payment Information
+      %h5
+        Payment Information
       %br= @order.credit_card.number
       = "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
     .col-md-12
-      = @order.order_items.map(&:book).map(&:title)
+      - @order.order_items.map do |oi|
+        %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+        %p= "SHIPPING: #{@order.delivery.price}"
+        %p= "TOTAL: #{@order.total_price}"
     .col-md-12
       %br= link_to 'GO BACK TO STORE', root_path

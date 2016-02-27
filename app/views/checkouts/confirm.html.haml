@@ -6,19 +6,30 @@
       %h5
         Billing Address
         = link_to('edit', addresses_order_checkout_path)
-      %p= "#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
+      %p="#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
       %p="#{@order.billing_address.address}"
       %p="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
       %p="#{@order.billing_address.country.name}"
       %p="#{@order.billing_address.phone}"
     .col-md-3
-      %h5 Shipping Address
-      %br= @order.shipping_address
+      %h5
+        Shipping Address
+        = link_to('edit', addresses_order_checkout_path)
+      %p="#{@order.shipping_address.firstname} #{@order.shipping_address.lastname}"
+      %p="#{@order.shipping_address.address}"
+      %p="#{@order.shipping_address.city} #{@order.shipping_address.zipcode}"
+      %p="#{@order.shipping_address.country.name}"
+      %p="#{@order.shipping_address.phone}"
     .col-md-3
-      %h5 Shipments
-      %br= @order.delivery
+      %h5
+        Shipments
+        = link_to('edit', delivery_order_checkout_path)
+      %br= @order.delivery.title
+      %br= @order.delivery.price
     .col-md-3
-      %h5 Payment Information
+      %h5
+        Payment Information
+        = link_to('edit', payment_order_checkout_path)
       %br= @order.credit_card.number
       = "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
     .col-md-12

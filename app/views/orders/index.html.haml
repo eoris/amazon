@@ -5,6 +5,7 @@
     - o.order_items.map do |oi|
       %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
     = "SUBTOTAL: #{o.total_price}"
+    = link_to 'view', order_checkout_path(o)
 
 %h4
   %b Orders in queue
@@ -13,4 +14,5 @@
     - o.order_items.map do |oi|
       %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
     = "TOTAL: #{o.total_price}"
+    = link_to 'view', order_path(o)
 
