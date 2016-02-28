@@ -52,7 +52,7 @@ class CheckoutsController < ApplicationController
   end
 
   def place
-    @order.state = 'in queue'
+    @order.in_queue
     @order.completed_date = Time.now
     @order.total_price += @order.delivery.price
     if @order.save
@@ -63,7 +63,7 @@ class CheckoutsController < ApplicationController
   end
 
   def show
-    redirect_to confirm_order_checkout_path unless @order.state == 'in queue'
+    redirect_to confirm_order_checkout_path unless @order.in_queue?
   end
 
   private
@@ -81,7 +81,7 @@ class CheckoutsController < ApplicationController
   end
 
   def order_state_check
-    redirect_to root_path unless @order.state == 'in progress'
+    redirect_to root_path unless @order.in_progress?
   end
 
   def addresses_init
