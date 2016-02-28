@@ -10,7 +10,7 @@
     - book.authors.map do |n|
       = link_to "#{n.firstname} #{n.lastname}", n
   .col-md-4
-    =image_tag('no_img.png', class: "img-responsive center-block")
+    =image_tag(book.book_cover, class: "img-responsive center-block")
     = render partial: "stars", locals: {book: book}
   .col-md-8
     %p#book-description{:align => "justify"}

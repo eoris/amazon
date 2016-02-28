@@ -25,6 +25,10 @@ gem 'rails_admin'
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
 end
+# Use Carrierwave
+gem 'carrierwave'
+# Use MiniMagick
+gem "mini_magick"
 # Use Kaminari
 gem 'kaminari'
 # Use Uglifier as compressor for JavaScript assets
