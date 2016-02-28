@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
+    aasm (4.9.0)
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
       actionview (= 4.2.5)
@@ -43,6 +44,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.1)
+    cancancan (1.13.1)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -273,7 +275,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   byebug
+  cancancan (~> 1.10)
   carrierwave
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)

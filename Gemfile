@@ -15,6 +15,10 @@ gem 'devise-bootstrap-views'
 # Use Omniauth
 gem 'omniauth'
 gem 'omniauth-facebook'
+# Use Cancancan
+gem 'cancancan', '~> 1.10'
+# Use AASM
+gem 'aasm'
 # Use Simple form
 gem 'simple_form'
 # Use Wicked
