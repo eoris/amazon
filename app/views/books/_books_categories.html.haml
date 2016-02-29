@@ -5,7 +5,7 @@
         .col-sm-6.col-md-4
           .thumbnail.shop
             = link_to book do
-              =image_tag(book.book_cover, class: "img-responsive center-block")
+              =image_tag(book.book_cover, class: "img-responsive img-thumbnail center-block")
             .caption
               %h4.text-center.books-title= link_to truncate(book.title, length: 50), book
               %p.books-description{:align => "justify"}= truncate(book.description, length: 100)

@@ -32,6 +32,10 @@ body {
   overflow: hidden;
 }
 
+img.img-responsive.img-thumbnail.center-block {
+  height: 164px;
+}
+
 .thumbnail.shop {
   height: 350px;
 }
@@ -66,9 +70,8 @@ h4.text-center.price {
 }
 
 /*book show*/
-.img-responsive.center-block.thumbnail {
+.img-thumbnail {
   height: 164px;
-  length: 200px;
 }
 
 /*book review*/
