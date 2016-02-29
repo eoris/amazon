@@ -32,4 +32,8 @@ class Order < ActiveRecord::Base
       transitions from: [:in_queue, :in_delivery], to: :canceled
     end
   end
+
+  def state_enum
+    self.class.aasm.states_for_select
+  end
 end
