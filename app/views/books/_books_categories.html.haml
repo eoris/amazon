@@ -3,7 +3,7 @@
     .row
       - @books.each do |book|
         .col-sm-6.col-md-4
-          .thumbnail
+          .thumbnail.shop
             = link_to book do
               =image_tag(book.book_cover, class: "img-responsive center-block")
             .caption
