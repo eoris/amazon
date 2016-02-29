@@ -36,7 +36,6 @@ class CheckoutsController < ApplicationController
 
   def payment
     redirect_to delivery_order_checkout_path if @order.delivery.nil?
-    @credit_card = CreditCard.find_or_initialize_by(order_id: @order.id)
   end
 
   def create_payment
@@ -67,10 +66,6 @@ class CheckoutsController < ApplicationController
   end
 
   private
-
-  def set_customer
-    @customer = current_customer
-  end
 
   def find_order
     @order = Order.find(params[:order_id])

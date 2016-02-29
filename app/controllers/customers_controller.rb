@@ -14,10 +14,10 @@ class CustomersController < ApplicationController
       sign_in @customer, bypass: true
       flash[:notice] = 'Password Changed'
       redirect_to edit_customer_path
-    elsif params[:billing] && @billing_address.update(billing_params)
+    elsif params[:billing_address] && @billing_address.update(billing_params)
       flash[:notice] = 'Billing address is updated'
       redirect_to edit_customer_path
-    elsif params[:shipping] && @shipping_address.update(shipping_params)
+    elsif params[:shipping_address] && @shipping_address.update(shipping_params)
       flash[:notice] = 'Shipping address is updated'
       redirect_to edit_customer_path
     else
@@ -27,31 +27,31 @@ class CustomersController < ApplicationController
 
   private
 
-    def addresses_init
-      @countries = Country.all
-      @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
-      @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
-    end
+  def addresses_init
+    @countries = Country.all
+    @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
+    @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
+  end
 
-    def customer_params
-      params.require(:customer).permit(:firstname, :lastname, :email)
-    end
+  def customer_params
+    params.require(:customer).permit(:firstname, :lastname, :email)
+  end
 
-    def passwords_params
-      params.require(:passwords).permit(:password,
-                                        :current_password,
-                                        :password_confirmation)
-    end
+  def passwords_params
+    params.require(:passwords).permit(:password,
+                                      :current_password,
+                                      :password_confirmation)
+  end
 
-    def billing_params
-      params.require(:billing).permit(:firstname, :lastname, :address,
-                                      :city, :country_id, :country,
-                                      :zipcode, :phone)
-    end
+  def billing_params
+    params.require(:billing_address).permit(:firstname, :lastname,
+                                            :address, :city, :country_id,
+                                            :country, :zipcode, :phone)
+  end
 
-    def shipping_params
-      params.require(:shipping).permit(:firstname, :lastname, :address,
-                                       :city, :country_id, :country,
-                                       :zipcode, :phone)
-    end
+  def shipping_params
+    params.require(:shipping_address).permit(:firstname, :lastname,
+                                             :address, :city, :country_id,
+                                             :country, :zipcode, :phone)
+  end
 end
