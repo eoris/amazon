@@ -4,8 +4,6 @@ class OrdersController < ApplicationController
 
   def index
     @orders = @customer.orders
-    @orders_in_progress = @orders.where(state: 'in progress')
-    @orders_in_queue = @orders.where(state: 'in queue')
   end
 
   def show

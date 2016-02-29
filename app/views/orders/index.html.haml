@@ -1,18 +1,35 @@
-%h4
-  %b Order in progress
-- @orders_in_progress.each do |o|
-  .panel.panel-default.panel-body
-    - o.order_items.map do |oi|
-      %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-    = "SUBTOTAL: #{o.total_price}"
-    = link_to 'view', order_checkout_path(o)
-
-%h4
-  %b Orders in queue
-- @orders_in_queue.each do |o|
-  .panel.panel-default.panel-body
-    - o.order_items.map do |oi|
-      %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-    = "TOTAL: #{o.total_price}"
-    = link_to 'view', order_path(o)
-
+.container
+  .row
+    .col-md-12
+    %h4
+      %b IN PROGRESS
+    - @orders.in_progress.each do |o|
+      .panel.panel-default.panel-body
+        - o.order_items.map do |oi|
+          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+        = "SUBTOTAL: #{o.total_price}"
+        = link_to 'view', order_checkout_path(o)
+    %h4
+      %b WAITING FOR PROCESSING
+    - @orders.in_queue.each do |o|
+      .panel.panel-default.panel-body
+        - o.order_items.map do |oi|
+          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+        = "TOTAL: #{o.total_price}"
+        = link_to 'view', order_path(o)
+    %h4
+      %b IN DELIVERY
+    - @orders.in_delivery.each do |o|
+      .panel.panel-default.panel-body
+        - o.order_items.map do |oi|
+          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+        = "TOTAL: #{o.total_price}"
+        = link_to 'view', order_path(o)
+    %h4
+      %b DELIVERED
+    - @orders.delivered.each do |o|
+      .panel.panel-default.panel-body
+        - o.order_items.map do |oi|
+          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
+        = "TOTAL: #{o.total_price}"
+        = link_to 'view', order_path(o)
