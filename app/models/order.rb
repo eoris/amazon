@@ -34,6 +34,6 @@ class Order < ActiveRecord::Base
   end
 
   def state_enum
-    self.class.aasm.states_for_select
+    ['in_queue', 'in_delivery', 'delivered', 'canceled']
   end
 end
