@@ -9,4 +9,10 @@ class Book < ActiveRecord::Base
   validates_numericality_of :quantity_in_stock, greater_than_or_equal_to: 0
 
   mount_uploader :book_cover, BookCoverUploader
+
+  scope :bestsellers, -> (count) { joins(order_items: :order)
+                                  .where(orders: {state: ['in_delivery', 'delivered']})
+                                  .group(:id).order('SUM(order_items.quantity) DESC')
+                                  .limit(count) }
+
 end
