@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
   resource :customer, only: [:edit, :update]
 
@@ -12,12 +12,10 @@ Rails.application.routes.draw do
   resources :authors, only: [:show]
 
   resource :cart, only: [:show] do
-    collection do
-      post    'add_item'
-      delete  'remove_item'
-      post    'checkout'
-      delete  'clear'
-    end
+    post    'add_item'
+    delete  'remove_item'
+    post    'checkout'
+    delete  'clear'
   end
 
   resources :orders, only: [:index, :show] do
