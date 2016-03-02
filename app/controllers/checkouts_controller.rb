@@ -51,9 +51,7 @@ class CheckoutsController < ApplicationController
   end
 
   def place
-    @order.in_queue
-    @order.completed_date = Time.now
-    @order.total_price += @order.delivery.price
+    Order.place_order(@order)
     if @order.save
       redirect_to order_checkout_path
     else
@@ -82,10 +80,10 @@ class CheckoutsController < ApplicationController
   def addresses_init
     @countries = Country.all
     if @order.shipping_address.nil? && @order.billing_address.nil?
-      @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id)
+      @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id).dup
       @billing_address.order_id = @order.id
       @billing_address.customer_id = nil
-      @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id)
+      @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id).dup
       @shipping_address.order_id = @order.id
       @shipping_address.customer_id = nil
     else

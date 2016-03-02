@@ -36,4 +36,10 @@ class Order < ActiveRecord::Base
   def state_enum
     ['in_queue', 'in_delivery', 'delivered', 'canceled']
   end
+
+  def self.place_order(order)
+    order.in_queue
+    order.completed_date = Time.now
+    order.total_price += order.delivery.price
+  end
 end
