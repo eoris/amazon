@@ -1,13 +1,31 @@
-- if @cart.blank?
-  = t('cart.your_cart_empty')
-- @cart.each_pair do |book_id, qty|
-  %br
-    = "Book: #{order_item_book(book_id).title},
-      Quantity: #{qty},
-      Price: #{order_item_price(qty, book_id)}"
-    = link_to('x', remove_item_cart_path(item_id: book_id), method: :delete)
-- unless @cart.empty?
-  %br= t("cart.subtotal") + " #{number_to_currency @subtotal}"
-  = link_to(t('cart.empty_cart'), clear_cart_path, method: :delete)
-  %br
-  %br= link_to("CHECKOUT", checkout_cart_path, method: :post)
+.container
+  .row
+    - if @cart.blank?
+      .text-center.jumbotron.lead
+        = t('cart.your_cart_empty')
+    %table.table.table-hover
+      %thead
+        %tr
+          %th= t('cart.book')
+          %th.text-center= t('cart.price')
+          %th.text-center= t('cart.qty')
+          %th.text-center= t('cart.total')
+          %th
+      - @cart.each_pair do |book_id, qty|
+        %tr
+          %td= "#{order_item_book(book_id).title}"
+          %td.text-center= "#{order_item_book(book_id).price}"
+          %td.text-center= "#{qty}"
+          %td.text-center= "#{order_item_price(qty, book_id)}"
+          %td.text-center= link_to('x', remove_item_cart_path(item_id: book_id), method: :delete)
+    - unless @cart.empty?
+      %p.text-right
+        %strong= t('cart.subtotal') + " #{number_to_currency @subtotal}"
+      .col-md-4
+        = link_to t('cart.empty_cart'), clear_cart_path, method: :delete, class: 'btn btn-danger'
+        = link_to t('cart.continue_shoping'), books_path, class: 'btn btn-default'
+      .col-md-4
+      .col-md-4
+        .pull-right
+          = link_to t('cart.checkout'), checkout_cart_path, method: :post, class: 'btn btn-success'
+
