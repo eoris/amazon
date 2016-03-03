@@ -2,34 +2,85 @@
   .row
     .col-md-12
     %h4
-      %b IN PROGRESS
+      %b= t('orders.in_progress')
     - @orders.in_progress.each do |o|
-      .panel.panel-default.panel-body
-        - o.order_items.map do |oi|
-          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-        = "SUBTOTAL: #{o.total_price}"
-        = link_to 'view', order_checkout_path(o)
+      %table.table.table-hover
+        %thead
+          %tr
+            %th
+            %th= t('orders.book')
+            %th.text-center= t('orders.price')
+            %th.text-center= t('orders.qty')
+            %th.text-center= t('orders.total')
+            %th
+        - o.order_items.each do |oi|
+          %tr
+            %td= image_tag(oi.book.book_cover, size: "50x82")
+            %td
+              %dl
+                %dt= oi.book.title
+                %dd= truncate(oi.book.description, length: 250)
+            %td.text-center= number_to_currency oi.price / oi.quantity
+            %td.text-center= oi.quantity
+            %td.text-center= number_to_currency oi.price
+      %ul.list-unstyled.list-inline
+        %li= link_to t('orders.back_to_checkout'), order_checkout_path(o), class: 'btn btn-success'
+        %li.pull-right
+          %ins= "#{t('orders.subtotal')} #{number_to_currency o.total_price}"
+%br
+.container
+  .row
+    .col-md-12
     %h4
-      %b WAITING FOR PROCESSING
-    - @orders.in_queue.each do |o|
-      .panel.panel-default.panel-body
-        - o.order_items.map do |oi|
-          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-        = "TOTAL: #{o.total_price}"
-        = link_to 'view', order_path(o)
+      = t('orders.waiting_for_processing')
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.text-center= t('orders.number')
+          %th.text-center= t('orders.completed_at')
+          %th.text-center= t('orders.total')
+          %th
+      - @orders.in_queue.each do |o|
+        %tr.text-center
+          %td= "№#{o.id}"
+          %td= o.completed_date.strftime('%Y-%m-%d')
+          %td= number_to_currency o.total_price
+          %td= link_to t('orders.view'), order_path(o)
+%br
+.container
+  .row
+    .col-md-12
     %h4
-      %b IN DELIVERY
-    - @orders.in_delivery.each do |o|
-      .panel.panel-default.panel-body
-        - o.order_items.map do |oi|
-          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-        = "TOTAL: #{o.total_price}"
-        = link_to 'view', order_path(o)
+      = t('orders.in_delivery')
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.text-center= t('orders.number')
+          %th.text-center= t('orders.completed_at')
+          %th.text-center= t('orders.total')
+          %th
+      - @orders.in_delivery.each do |o|
+        %tr.text-center
+          %td= "№#{o.id}"
+          %td= o.completed_date.strftime('%Y-%m-%d')
+          %td= number_to_currency o.total_price
+          %td= link_to t('orders.view'), order_path(o)
+%br
+.container
+  .row
+    .col-md-12
     %h4
-      %b DELIVERED
-    - @orders.delivered.each do |o|
-      .panel.panel-default.panel-body
-        - o.order_items.map do |oi|
-          %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-        = "TOTAL: #{o.total_price}"
-        = link_to 'view', order_path(o)
+      = t('orders.delivered')
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.text-center= t('orders.number')
+          %th.text-center= t('orders.completed_at')
+          %th.text-center= t('orders.total')
+          %th
+      - @orders.delivered.each do |o|
+        %tr.text-center
+          %td= "№#{o.id}"
+          %td= o.completed_date.strftime('%Y-%m-%d')
+          %td= number_to_currency o.total_price
+          %td= link_to t('orders.view'), order_path(o)

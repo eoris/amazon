@@ -63,5 +63,29 @@
             %td.text-center= number_to_currency oi.price
 .container
   .row
+    .col-md-9
+    .col-md-3
+      %table.table.table-hover
+        %thead
+          %tr
+            %td
+              %ul.list-unstyled.text-right
+                %li= t('checkout.subtotal')
+                %li= t('checkout.shipping')
+            %td
+              %ul.list-unstyled
+                %li= number_to_currency @order.total_price
+                %li= number_to_currency @order.delivery.price
+          %tr
+            %td
+              %ul.list-unstyled.text-right
+                %li
+                  %strong= t('checkout.order_total')
+            %td
+              %ul.list-unstyled
+                %li
+                  %strong= number_to_currency @order.total_price + @order.delivery.price
+.container
+  .row
     .col-md-12
       %br= button_to t('checkout.place_order'), place_order_checkout_path, method: :post, class: 'btn btn-success'

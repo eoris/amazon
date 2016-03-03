@@ -1,7 +1,9 @@
 .container
   .row
     .col-md-12
-      %h4.well.well-sm= "#{t('checkout.order')}#{@order.id}"
+      %h4.well.well-sm
+        = "#{t('checkout.order')}#{@order.id}"
+        %small= @order.state.humanize
 .container
   .row
     .col-md-3
@@ -56,6 +58,30 @@
             %td.text-center= number_to_currency oi.price
             %td.text-center= oi.quantity
             %td.text-center= number_to_currency oi.price
+.container
+  .row
+    .col-md-9
+    .col-md-3
+      %table.table.table-hover
+        %thead
+          %tr
+            %td
+              %ul.list-unstyled.text-right
+                %li= t('checkout.subtotal')
+                %li= t('checkout.shipping')
+            %td
+              %ul.list-unstyled
+                %li= number_to_currency @order.total_price - @order.delivery.price
+                %li= number_to_currency @order.delivery.price
+          %tr
+            %td
+              %ul.list-unstyled.text-right
+                %li
+                  %strong= t('checkout.order_total')
+            %td
+              %ul.list-unstyled
+                %li
+                  %strong= number_to_currency @order.total_price
 .container
   .row
     .col-md-12

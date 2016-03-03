@@ -107,3 +107,18 @@ en:
     subtotal: 'SUBTOTAL:'
     back_to_store: 'GO BACK TO STORE'
     order: 'Order №'
+  orders:
+    in_progress: 'IN PROGRESS'
+    book: 'BOOK'
+    price: 'PRICE'
+    qty: 'QTY'
+    total: 'TOTAL'
+    waiting_for_processing: 'WAITING FOR PROCESSING'
+    in_delivery: 'IN DELIVERY'
+    delivered: 'DELIVERED'
+    back_to_checkout: 'BACK TO CHECKOUT'
+    subtotal: 'SUBTOTAL:'
+    number: 'NUMBER'
+    completed_at: 'COMPLETED AT'
+    total: 'TOTAL'
+
