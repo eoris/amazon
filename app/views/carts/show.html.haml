@@ -17,7 +17,10 @@
         - @cart.each_pair do |book_id, qty|
           %tr
             %td= image_tag(order_item_book(book_id).book_cover, size: "50x82")
-            %td= order_item_book(book_id).title
+            %td
+              %dl
+                %dt= order_item_book(book_id).title
+                %dd= truncate(order_item_book(book_id).description, length: 250)
             %td.text-center= order_item_book(book_id).price
             %td.text-center= qty
             %td.text-center= order_item_price(qty, book_id)
