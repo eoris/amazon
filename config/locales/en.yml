@@ -37,8 +37,6 @@ en:
     sign_in: 'Sign In'
     sign_up: 'Sign Up'
     sign_out: 'Sign Out'
-    # edit_registration: 'Edit registration'
-    # registration: 'Register'
   categories:
     categories: 'Categories'
     shop_by_categories: 'SHOP BY CATEGORIES'
@@ -81,5 +79,16 @@ en:
     we_need_your_current_password_to_confirm_your_changes: "we need your current password to confirm your changes"
     update: "Update"
     unhappy: "Unhappy"
-  orders:
-    save: "SAVE AND CONTINUE"
+  checkout:
+    checkout: 'CHECKOUT'
+    address: 'ADDRESS'
+    delivery: 'DELIVERY'
+    payment: 'PAYMENT'
+    confirm: 'CONFIRM'
+    complete: 'COMPLETE'
+    billing_address: 'Billing Address'
+    shippin_address: 'Shipping Address'
+    order_summary: 'Order Summary'
+    item_total: 'ITEM TOTAL:'
+    order_total: 'ORDER TOTAL:'
+    save: 'SAVE AND CONTINUE'

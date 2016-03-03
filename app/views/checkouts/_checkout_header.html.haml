@@ -1,0 +1,24 @@
+.container
+  .row
+    .col-md-12
+      %h3= t('checkout.checkout')
+      %ol.breadcrumb.text-center
+        %li
+          = link_to t('checkout.address'), addresses_order_checkout_path
+        %li
+          - if @order.billing_address.nil? || @order.shipping_address.nil?
+            = t('checkout.delivery')
+          - else
+            = link_to t('checkout.delivery'), delivery_order_checkout_path
+        %li
+          - if @order.delivery.nil?
+            = t('checkout.payment')
+          - else
+            = link_to t('checkout.payment'), payment_order_checkout_path
+        %li
+          - if @order.credit_card.nil?
+            = t('checkout.confirm')
+          - else
+            = link_to t('checkout.confirm'), confirm_order_checkout_path
+        %li
+          = t('checkout.complete')
