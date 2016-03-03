@@ -1,0 +1,24 @@
+.panel.panel-default.shipping
+  .panel-heading
+    %h4
+      = t('checkout.order_summary')
+  .panel-body
+    %table.table
+      %thead
+        %tr
+          %td= t('checkout.item_total')
+          %td= number_to_currency @order.total_price
+        %tr
+          %td= t('checkout.shipping')
+          %td
+            - if @order.delivery.blank?
+              = number_to_currency @deliveries.first.price
+            - else
+              = number_to_currency @order.delivery.price
+        %tr.info
+          %td= t('checkout.order_total')
+          %td
+            - if @order.delivery.blank?
+              = number_to_currency @order.total_price + @deliveries.first.price
+            - else
+              = number_to_currency @order.total_price + @order.delivery.price

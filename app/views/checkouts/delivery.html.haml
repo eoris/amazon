@@ -2,13 +2,20 @@
 .container
   .row
     .col-md-4
-      = simple_form_for @order, url: create_delivery_order_checkout_path(@order), method: :patch do |f|
-        - @deliveries.each do |d|
-          .radio
-          = f.radio_button :delivery_id, d.id, checked: d == @order.delivery || d == @deliveries.first
-          = "#{d.title} + #{number_to_currency(d.price)}"
-        %br= f.submit t("orders.save")
+      .panel.panel-default.billing
+        .panel-heading
+          %h4.text-capitalize= t('checkout.delivery')
+        .panel-body
+          = simple_form_for @order, url: create_delivery_order_checkout_path(@order), method: :patch do |f|
+            - @deliveries.each do |d|
+              .radid
+                %lable
+                  %p
+                    = f.radio_button :delivery_id, d.id, checked: d == @order.delivery || d == @deliveries.first
+                    = "#{d.title} + #{number_to_currency(d.price)}"
+            %br= f.submit t("checkout.save"), class: 'btn btn-primary'
     .col-md-4
     .col-md-4
+      = render 'order_summary'
 
 

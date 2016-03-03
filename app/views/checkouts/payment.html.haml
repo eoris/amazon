@@ -1,14 +1,22 @@
+= render 'checkout_header'
 .container
   .row
     .col-md-4
-      = simple_form_for @credit_card, url: create_payment_order_checkout_path, method: :post do |f|
-        = f.input :number, {min: 16, max: 16}
-        %br
-          = select_month(Date.today, use_month_numbers: true, prefix: 'credit_card', field_name: 'expiration_month')
-          = select_year(Date.today, start_year: 2016, end_year: 2033, prefix: 'credit_card', field_name: 'expiration_year')
-        %br
-        = f.input :cvv
-        %br= f.submit t("orders.save")
+      .panel.panel-default.billing
+        .panel-heading
+          %h4.text-capitalize= t('checkout.payment')
+        .panel-body
+          = simple_form_for @credit_card, url: create_payment_order_checkout_path, method: :post do |f|
+            = f.input :number, label: false, placeholder: 'Card Number', input_html: { minlength: 16, maxlength: 16 }
+            %br
+              %h5= t('checkout.expiration_date')
+              = select_month(Date.today, use_month_numbers: true, prefix: 'credit_card', field_name: 'expiration_month')
+              = select_year(Date.today, start_year: 2016, end_year: 2033, prefix: 'credit_card', field_name: 'expiration_year')
+            %br
+            .form-inline
+              = f.input :cvv, label: false, placeholder: 'CVV', input_html: { minlength: 3, maxlength: 3, style: 'width: 80px' }
+              = link_to t('checkout.whats_this'), 'https://www.cvvnumber.com/'
+            %br= f.submit t("checkout.save"), class: 'btn btn-primary'
     .col-md-4
     .col-md-4
-
+      = render 'order_summary'

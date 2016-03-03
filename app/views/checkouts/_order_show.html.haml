@@ -1,37 +1,62 @@
 .container
   .row
     .col-md-12
-      %h4= "ORDER №#{@order.id}"
+      %h4.well.well-sm= "#{t('checkout.order')}#{@order.id}"
+.container
+  .row
     .col-md-3
       %h5
-        Billing Address
-      %p="#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
-      %p="#{@order.billing_address.address}"
-      %p="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
-      %p="#{@order.billing_address.country.name}"
-      %p="#{@order.billing_address.phone}"
+        %strong= t('checkout.billing_address')
+      %ul.list-unstyled
+        %li="#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
+        %li="#{@order.billing_address.address}"
+        %li="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
+        %li="#{@order.billing_address.country.name}"
+        %li="#{@order.billing_address.phone}"
     .col-md-3
       %h5
-        Shipping Address
-      %p="#{@order.shipping_address.firstname} #{@order.shipping_address.lastname}"
-      %p="#{@order.shipping_address.address}"
-      %p="#{@order.shipping_address.city} #{@order.shipping_address.zipcode}"
-      %p="#{@order.shipping_address.country.name}"
-      %p="#{@order.shipping_address.phone}"
+        %strong= t('checkout.shipping_address')
+      %ul.list-unstyled
+        %li="#{@order.shipping_address.firstname} #{@order.shipping_address.lastname}"
+        %li="#{@order.shipping_address.address}"
+        %li="#{@order.shipping_address.city} #{@order.shipping_address.zipcode}"
+        %li="#{@order.shipping_address.country.name}"
+        %li="#{@order.shipping_address.phone}"
     .col-md-3
       %h5
-        Shipments
-      %br= @order.delivery.title
-      %br= @order.delivery.price
+        %strong= t('checkout.shipments')
+      %ul.list-unstyled
+        %li= @order.delivery.title
+        %li= number_to_currency @order.delivery.price
     .col-md-3
       %h5
-        Payment Information
-      %br= @order.credit_card.number
-      = "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
+        %strong= t('checkout.payment_information')
+      %ul.list-unstyled
+        %li= "#{t('checkout.asterisk')} #{@order.credit_card.number.to_s.last(4)}"
+        %li= "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
+.container
+  .row
     .col-md-12
-      - @order.order_items.map do |oi|
-        %p"BOOK: #{oi.book.title}, PRICE: #{oi.book.price}, QTY: #{oi.quantity}, TOTAL: #{oi.price}"
-        %p= "SHIPPING: #{@order.delivery.price}"
-        %p= "TOTAL: #{@order.total_price}"
+      %table.table.table-hover
+        %thead
+          %tr
+            %th
+            %th= t('checkout.book')
+            %th.text-center= t('checkout.price')
+            %th.text-center= t('checkout.qty')
+            %th.text-center= t('checkout.total')
+            %th
+        - @order.order_items.each do |oi|
+          %tr
+            %td= image_tag(oi.book.book_cover, size: "50x82")
+            %td
+              %dl
+                %dt= oi.book.title
+                %dd= truncate(oi.book.description, length: 250)
+            %td.text-center= number_to_currency oi.price
+            %td.text-center= oi.quantity
+            %td.text-center= number_to_currency oi.price
+.container
+  .row
     .col-md-12
-      %br= link_to 'GO BACK TO STORE', root_path
+      %br= link_to t('checkout.back_to_store'), root_path, class: 'btn btn-default'

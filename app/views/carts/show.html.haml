@@ -12,7 +12,6 @@
             %th.text-center= t('cart.price')
             %th.text-center= t('cart.qty')
             %th.text-center= t('cart.total')
-            %th.text-center= t('cart.total')
             %th
         - @cart.each_pair do |book_id, qty|
           %tr
@@ -21,10 +20,9 @@
               %dl
                 %dt= order_item_book(book_id).title
                 %dd= truncate(order_item_book(book_id).description, length: 250)
-            %td.text-center= order_item_book(book_id).price
+            %td.text-center= number_to_currency order_item_book(book_id).price
             %td.text-center= qty
-            %td.text-center= order_item_price(qty, book_id)
-            %td.text-center= order_item_price(qty, book_id)
+            %td.text-center= number_to_currency order_item_price(qty, book_id)
             %td.text-center= link_to('×', remove_item_cart_path(item_id: book_id), method: :delete, class: 'close')
       - unless @cart.empty?
         %p.text-right

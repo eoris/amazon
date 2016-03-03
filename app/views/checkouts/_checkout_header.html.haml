@@ -5,12 +5,12 @@
       %ol.breadcrumb.text-center
         %li
           = link_to t('checkout.address'), addresses_order_checkout_path
-        %li
+        %li.text-uppercase
           - if @order.billing_address.nil? || @order.shipping_address.nil?
             = t('checkout.delivery')
           - else
             = link_to t('checkout.delivery'), delivery_order_checkout_path
-        %li
+        %li.text-uppercase
           - if @order.delivery.nil?
             = t('checkout.payment')
           - else

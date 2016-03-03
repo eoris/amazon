@@ -1,38 +1,67 @@
+= render 'checkout_header'
 .container
   .row
     .col-md-12
-      %h4 CONFIRM
+      %h4= t('checkout.confirm')
+.container
+  .row
     .col-md-3
       %h5
-        Billing Address
-        = link_to('edit', addresses_order_checkout_path)
-      %p="#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
-      %p="#{@order.billing_address.address}"
-      %p="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
-      %p="#{@order.billing_address.country.name}"
-      %p="#{@order.billing_address.phone}"
+        %strong= t('checkout.billing_address')
+        %small= link_to(t('checkout.edit'), addresses_order_checkout_path)
+      %ul.list-unstyled
+        %li="#{@order.billing_address.firstname} #{@order.billing_address.lastname}"
+        %li="#{@order.billing_address.address}"
+        %li="#{@order.billing_address.city} #{@order.billing_address.zipcode}"
+        %li="#{@order.billing_address.country.name}"
+        %li="#{@order.billing_address.phone}"
     .col-md-3
       %h5
-        Shipping Address
-        = link_to('edit', addresses_order_checkout_path)
-      %p="#{@order.shipping_address.firstname} #{@order.shipping_address.lastname}"
-      %p="#{@order.shipping_address.address}"
-      %p="#{@order.shipping_address.city} #{@order.shipping_address.zipcode}"
-      %p="#{@order.shipping_address.country.name}"
-      %p="#{@order.shipping_address.phone}"
+        %strong= t('checkout.shipping_address')
+        %small= link_to(t('checkout.edit'), addresses_order_checkout_path)
+      %ul.list-unstyled
+        %li="#{@order.shipping_address.firstname} #{@order.shipping_address.lastname}"
+        %li="#{@order.shipping_address.address}"
+        %li="#{@order.shipping_address.city} #{@order.shipping_address.zipcode}"
+        %li="#{@order.shipping_address.country.name}"
+        %li="#{@order.shipping_address.phone}"
     .col-md-3
       %h5
-        Shipments
-        = link_to('edit', delivery_order_checkout_path)
-      %br= @order.delivery.title
-      %br= @order.delivery.price
+        %strong= t('checkout.shipments')
+        %small= link_to(t('checkout.edit'), delivery_order_checkout_path)
+      %ul.list-unstyled
+        %li= @order.delivery.title
+        %li= number_to_currency @order.delivery.price
     .col-md-3
       %h5
-        Payment Information
-        = link_to('edit', payment_order_checkout_path)
-      %br= @order.credit_card.number
-      = "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
+        %strong= t('checkout.payment_information')
+        %small= link_to(t('checkout.edit'), payment_order_checkout_path)
+      %ul.list-unstyled
+        %li= "#{t('checkout.asterisk')} #{@order.credit_card.number.to_s.last(4)}"
+        %li= "#{@order.credit_card.expiration_month} / #{@order.credit_card.expiration_year}"
+.container
+  .row
     .col-md-12
-      = @order.order_items.map(&:book).map(&:title)
+      %table.table.table-hover
+        %thead
+          %tr
+            %th
+            %th= t('checkout.book')
+            %th.text-center= t('checkout.price')
+            %th.text-center= t('checkout.qty')
+            %th.text-center= t('checkout.total')
+            %th
+        - @order.order_items.each do |oi|
+          %tr
+            %td= image_tag(oi.book.book_cover, size: "50x82")
+            %td
+              %dl
+                %dt= oi.book.title
+                %dd= truncate(oi.book.description, length: 250)
+            %td.text-center= number_to_currency oi.price
+            %td.text-center= oi.quantity
+            %td.text-center= number_to_currency oi.price
+.container
+  .row
     .col-md-12
-      %br= button_to 'PLACE ORDER', place_order_checkout_path, method: :post
+      %br= button_to t('checkout.place_order'), place_order_checkout_path, method: :post, class: 'btn btn-success'
