@@ -10,7 +10,9 @@ class Cart
   end
 
   def params_valid?(params)
-    params.values.all? { |v| v.to_i.between?(1, 9)}
+    params.each_pair do |book_id, qty|
+      book_id.to_i > 1 && qty.to_i.between?(1, 9)
+    end
   end
 
   def add_item_to_cart(cart_params)
