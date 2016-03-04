@@ -10,7 +10,7 @@ class Cart
   end
 
   def params_valid?(params)
-    params.values.all? { |v| v.to_i >= 1 }
+    params.values.all? { |v| v.to_i.between?(1, 9)}
   end
 
   def add_item_to_cart(cart_params)
