@@ -5,6 +5,7 @@ class CheckoutsController < ApplicationController
   before_action :order_state_check, except: [:show]
   before_action :addresses_init, only: [:addresses, :create_addresses]
   before_action :find_or_init_credit_card, only: [:payment, :create_payment]
+  before_action :authorize_checkout
 
   def addresses
     redirect_to root_path if @order.nil?
@@ -51,7 +52,7 @@ class CheckoutsController < ApplicationController
   end
 
   def place
-    Order.place_order(@order)
+    Order.build_state_date_price(@order)
     if @order.save
       redirect_to order_checkout_path
     else
@@ -64,6 +65,10 @@ class CheckoutsController < ApplicationController
   end
 
   private
+
+  def authorize_checkout
+    authorize! :checkout, @order
+  end
 
   def find_order
     @order = Order.find(params[:order_id])
@@ -80,12 +85,8 @@ class CheckoutsController < ApplicationController
   def addresses_init
     @countries = Country.all
     if @order.shipping_address.nil? && @order.billing_address.nil?
-      @billing_address = BillingAddress.find_or_initialize_by(customer_id: @customer.id).dup
-      @billing_address.order_id = @order.id
-      @billing_address.customer_id = nil
-      @shipping_address = ShippingAddress.find_or_initialize_by(customer_id: @customer.id).dup
-      @shipping_address.order_id = @order.id
-      @shipping_address.customer_id = nil
+      @billing_address = BillingAddress.build_billing_address(@customer, @order)
+      @shipping_address = ShippingAddress.build_shipping_address(@customer, @order)
     else
       @billing_address = BillingAddress.find_or_initialize_by(order_id: @order.id)
       @shipping_address = ShippingAddress.find_or_initialize_by(order_id: @order.id)

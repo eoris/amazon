@@ -121,4 +121,5 @@ en:
     number: 'NUMBER'
     completed_at: 'COMPLETED AT'
     total: 'TOTAL'
+    view: 'view'
 

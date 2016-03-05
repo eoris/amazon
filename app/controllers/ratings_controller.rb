@@ -1,10 +1,11 @@
 class RatingsController < ApplicationController
   before_action :authenticate_customer!
-  before_action :find_book, only: [:new, :create]
+  before_action :find_book
+  load_and_authorize_resource
 
   def new
-    if @book.ratings.map(&:customer_id).include? current_customer.id
-      flash[:error] = "You have already left a review"
+    if @book.has_customer_review?(current_customer)
+      flash[:error] = 'You have already left a review'
       redirect_to @book
     else
       @rating = Rating.new
@@ -13,12 +14,12 @@ class RatingsController < ApplicationController
 
   def create
     @rating = @book.ratings.build(rating_params)
-    @rating.customer_id = current_customer.id if current_customer
+    @rating.customer = current_customer
     if @rating.save
-      redirect_to @book, notice: "Thank you for your review"
+      redirect_to @book, notice: 'Thank you for your review'
     else
       render 'new'
-      flash.now[:error] = "Something went wrong"
+      flash.now[:error] = 'Something went wrong'
     end
   end
 

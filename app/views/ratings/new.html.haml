@@ -9,7 +9,7 @@
         = f.input :rating, label: t('rating.rating'),
           as: :radio_buttons, collection: 1..10,
           item_label_class: "radio-inline", item_wrapper_tag: false
-        = f.input :review, label: t('rating.review')
+        %p= f.input :review, label: t('rating.review')
         = f.button :submit, t('rating.add')
         or
         = link_to t('rating.cancel'), @book

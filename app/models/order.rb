@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
     ['in_queue', 'in_delivery', 'delivered', 'canceled']
   end
 
-  def self.place_order(order)
+  def self.build_state_date_price(order)
     order.in_queue
     order.completed_date = Time.now
     order.total_price += order.delivery.price

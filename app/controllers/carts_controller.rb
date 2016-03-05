@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :authenticate_customer!, only: [:checkout]
+  load_and_authorize_resource
 
   def show
     @cart = cart.session
