@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    redirect_to root_url, :alert => exception.message
+    redirect_to root_url, alert: exception.message
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    redirect_to root_url, alert: exception.message
   end
 
   def store_location
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
     @customer = current_customer
   end
 
-  alias_method :current_user, :current_customer
+  alias :current_user :current_customer
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [:firstname, :lastname]
