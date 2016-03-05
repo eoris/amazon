@@ -10,7 +10,7 @@ class Ability
     if user.id
       can [:new, :create], Rating, customer_id: user.id
       can [:read, :checkout], Order, customer_id: user.id
-      can :update, Customer, customer_id: user.id
+      can :edit, Customer, id: user.id
     end
   end
 end

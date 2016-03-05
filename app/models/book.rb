@@ -14,8 +14,4 @@ class Book < ActiveRecord::Base
                                   .where(orders: {state: ['in_delivery', 'delivered']})
                                   .group(:id).order('SUM(order_items.quantity) DESC')
                                   .limit(count) }
-
-  def has_customer_review?(customer)
-    ratings.map(&:customer_id).include?(customer.id)
-  end
 end
