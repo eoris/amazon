@@ -6,7 +6,7 @@
         .panel-heading
           %h4.text-capitalize= t('checkout.delivery')
         .panel-body
-          = simple_form_for @order, url: create_delivery_order_checkout_path(@order), method: :patch do |f|
+          = simple_form_for @order, url: update_delivery_order_checkout_path(@order), method: :patch do |f|
             - @deliveries.each do |d|
               .radid
                 %lable

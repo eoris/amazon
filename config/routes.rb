@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
-  resource :customer, only: [:edit, :update]
+  resource :customer, only: [:edit, :update] do
+    patch 'update_billing'
+    patch 'update_shipping'
+  end
 
   root 'books#bestsellers'
   resources :books, only: [:index, :show] do
@@ -21,11 +24,11 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show] do
     resource :checkout, only: [:show] do
       get   'addresses'
-      put   'create_addresses'
+      patch 'update_addresses'
       get   'delivery'
-      patch 'create_delivery'
+      patch 'update_delivery'
       get   'payment'
-      post  'create_payment'
+      patch 'update_payment'
       get   'confirm'
       post  'place'
     end

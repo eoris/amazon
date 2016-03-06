@@ -6,7 +6,7 @@
         .panel-heading
           %h4.text-capitalize= t('checkout.payment')
         .panel-body
-          = simple_form_for @credit_card, url: create_payment_order_checkout_path, method: :post do |f|
+          = simple_form_for @credit_card, url: update_payment_order_checkout_path, method: :patch do |f|
             = f.input :number, label: false, placeholder: 'Card Number', input_html: { minlength: 16, maxlength: 16 }
             %br
               %h5= t('checkout.expiration_date')

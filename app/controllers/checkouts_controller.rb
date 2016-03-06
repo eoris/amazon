@@ -3,15 +3,15 @@ class CheckoutsController < ApplicationController
   before_action :set_customer
   before_action :find_order
   before_action :order_state_check, except: [:show]
-  before_action :addresses_init, only: [:addresses, :create_addresses]
-  before_action :find_or_init_credit_card, only: [:payment, :create_payment]
+  before_action :addresses_init, only: [:addresses, :update_addresses]
+  before_action :find_or_init_credit_card, only: [:payment, :update_payment]
   before_action :authorize_checkout
 
   def addresses
     redirect_to root_path if @order.nil?
   end
 
-  def create_addresses
+  def update_addresses
     if @billing_address.update(billing_params) && @shipping_address.update(shipping_params)
       redirect_to delivery_order_checkout_path
     else
@@ -27,7 +27,7 @@ class CheckoutsController < ApplicationController
     end
   end
 
-  def create_delivery
+  def update_delivery
     if @order.update(delivery_params)
       redirect_to payment_order_checkout_path
     else
@@ -39,7 +39,7 @@ class CheckoutsController < ApplicationController
     redirect_to delivery_order_checkout_path if @order.delivery.nil?
   end
 
-  def create_payment
+  def update_payment
     if @credit_card.update(payment_params)
       redirect_to confirm_order_checkout_path
     else

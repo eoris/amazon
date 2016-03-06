@@ -14,10 +14,22 @@ class CustomersController < ApplicationController
       sign_in @customer, bypass: true
       flash[:notice] = 'Password Changed'
       redirect_to edit_customer_path
-    elsif params[:billing_address] && @billing_address.update(billing_params)
+    else
+      render 'edit'
+    end
+  end
+
+  def update_billing
+    if @billing_address.update(billing_params)
       flash[:notice] = 'Billing address is updated'
       redirect_to edit_customer_path
-    elsif params[:shipping_address] && @shipping_address.update(shipping_params)
+    else
+      render 'edit'
+    end
+  end
+
+  def update_shipping
+    if @shipping_address.update(shipping_params)
       flash[:notice] = 'Shipping address is updated'
       redirect_to edit_customer_path
     else
