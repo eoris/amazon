@@ -7,7 +7,7 @@
             = link_to t('categories.shop'), books_path
           %li.active
             = t('categories.categories')
-      - @categories.map do |category|
+      - @categories.sort_by(&:title).map do |category|
         %p
           %span.glyphicon.glyphicon-tag
           = link_to category.title, category
