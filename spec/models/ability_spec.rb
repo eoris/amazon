@@ -59,7 +59,6 @@ RSpec.describe Ability do
       it { expect(ability).to be_able_to(:create, Rating) }
       it { expect(ability).to be_able_to(:manage, Cart) }
       it { expect(ability).to be_able_to(:read, Order) }
-      it { expect(ability).to be_able_to(:read, OrderItem) }
       it { expect(ability).to be_able_to(:edit, Customer) }
       it { expect(ability).to be_able_to(:update_billing, Customer) }
       it { expect(ability).to be_able_to(:update_shipping, Customer) }
