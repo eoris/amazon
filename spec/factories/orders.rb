@@ -3,6 +3,7 @@ FactoryGirl.define do
     total_price    { Faker::Commerce.price }
     completed_date { Faker::Date.forward(23) }
     state          "in_progress"
+    customer
   end
 
 end
