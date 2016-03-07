@@ -23,7 +23,7 @@ RSpec.describe Address, type: :model do
   it { is_expected.to validate_presence_of(:phone) }
   it { is_expected.to validate_presence_of(:country_id) }
 
-  describe '#build_order_address' do
+  describe '.build_order_address' do
     it 'build address for order' do
       customer = create(:customer)
       shipping = create(:address, customer: customer)

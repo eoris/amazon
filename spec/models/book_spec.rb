@@ -21,14 +21,12 @@ RSpec.describe Book, type: :model do
       is_greater_than_or_equal_to(0)
   end
 
-  describe '#bestseller' do
+  describe '.bestseller' do
     it 'return bestsellers' do
-      create_list(:book, 7)
-      create_list(:order, 7)
       create_list(:order_item, 7, quantity: 5)
       book = create(:book)
       order = create(:order, state: 'delivered')
-      order_items = create(:order_item, quantity: 99, book_id: book.id, order_id: order.id)
+      create(:order_item, quantity: 6, book_id: book.id, order_id: order.id)
 
       expect(Book.bestsellers(1).first.id).to eq(book.id)
     end
