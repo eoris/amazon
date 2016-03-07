@@ -8,6 +8,8 @@ class Customer < ActiveRecord::Base
   has_many :ratings
   has_many :addresses
   has_many :credit_cards
+  has_one  :shipping_address
+  has_one  :billing_address
 
   validates :firstname, :lastname, presence: true
 

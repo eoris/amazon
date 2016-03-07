@@ -26,7 +26,7 @@ gem 'wicked'
 # Use Rails Admin
 gem 'rails_admin'
 # Use Bootstrap
-source 'https://rails-assets.org' do
+source 'https://rails-assets.tenex.tech' do
   gem 'rails-assets-bootstrap'
 end
 # Use Carrierwave

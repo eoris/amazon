@@ -25,6 +25,10 @@ RSpec.describe Customer, type: :model do
   it { is_expected.to have_many(:addresses) }
   it { is_expected.to have_many(:credit_cards) }
 
+  it { is_expected.to have_one(:billing_address) }
+  it { is_expected.to have_one(:shipping_address) }
+
+
   describe "validates uniqueness of an email" do
     subject { FactoryGirl.build(:customer) }
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
