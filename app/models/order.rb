@@ -41,5 +41,6 @@ class Order < ActiveRecord::Base
     order.in_queue
     order.completed_date = Time.now
     order.total_price += order.delivery.price
+    order
   end
 end
