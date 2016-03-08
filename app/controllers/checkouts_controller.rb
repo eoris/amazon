@@ -85,8 +85,8 @@ class CheckoutsController < ApplicationController
   def addresses_init
     @countries = Country.all
     if @order.shipping_address.nil? && @order.billing_address.nil?
-      @billing_address = Address.build_order_address(@customer, @order, 'BillingAddress')
-      @shipping_address = Address.build_order_address(@customer, @order, 'ShippingAddress')
+      @billing_address = BillingAddress.build_order_address(@customer, @order)
+      @shipping_address = ShippingAddress.build_order_address(@customer, @order)
     else
       @billing_address = BillingAddress.find_or_initialize_by(order_id: @order.id)
       @shipping_address = ShippingAddress.find_or_initialize_by(order_id: @order.id)

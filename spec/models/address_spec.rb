@@ -24,15 +24,47 @@ RSpec.describe Address, type: :model do
   it { is_expected.to validate_presence_of(:country_id) }
 
   describe '.build_order_address' do
-    it 'build address for order' do
-      customer = create(:customer)
-      shipping = create(:address, customer: customer)
-      order = create(:order)
+    before(:each) do
+      @customer = create(:customer)
+      @order = create(:order)
+      create(:address, customer: @customer, type: 'ShippingAddress')
+      create(:address, customer: @customer, type: 'BillingAddress')
+    end
 
-      expect(Address.build_order_address(customer, order, 'ShippingAddress').firstname).to eq(customer.shipping_address.firstname)
-      expect(Address.build_order_address(customer, order, 'ShippingAddress').order_id).to eq(order.id)
-      expect(Address.build_order_address(customer, order, 'ShippingAddress').customer_id).to be_nil
-      expect(Address.build_order_address(customer, order, 'ShippingAddress').type).to eq('ShippingAddress')
+    context 'when shipping address' do
+      it 'address type ShippingAddress' do
+        expect(ShippingAddress.build_order_address(@customer, @order).type).to eq('ShippingAddress')
+      end
+
+      it 'build shipping address' do
+        expect(ShippingAddress.build_order_address(@customer, @order).firstname).to eq(@customer.shipping_address.firstname)
+      end
+
+      it 'assign order_id to shipping address' do
+        expect(ShippingAddress.build_order_address(@customer, @order).order_id).to eq(@order.id)
+      end
+
+      it 'delete customer_id from shipping address' do
+        expect(ShippingAddress.build_order_address(@customer, @order).customer_id).to be_nil
+      end
+    end
+
+    context 'when billing address' do
+      it 'address type BillingAddress' do
+        expect(BillingAddress.build_order_address(@customer, @order).type).to eq('BillingAddress')
+      end
+
+      it 'build shipping address' do
+        expect(BillingAddress.build_order_address(@customer, @order).firstname).to eq(@customer.billing_address.firstname)
+      end
+
+      it 'assign order_id to billing address' do
+        expect(BillingAddress.build_order_address(@customer, @order).order_id).to eq(@order.id)
+      end
+
+      it 'delete customer_id from billing address' do
+        expect(BillingAddress.build_order_address(@customer, @order).customer_id).to be_nil
+      end
     end
   end
 end
