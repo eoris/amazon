@@ -9,17 +9,17 @@ class CartsController < ApplicationController
 
   def add_item
     cart.add_item_to_cart(cart_params)
-    redirect_to :back
+    redirect_to cart_path
   end
 
   def remove_item
     cart.remove_item_from_cart(params[:item_id])
-    redirect_to :back
+    redirect_to cart_path
   end
 
   def clear
     session[:cart] = nil
-    redirect_to :back
+    redirect_to cart_path
   end
 
   def checkout
@@ -28,17 +28,17 @@ class CartsController < ApplicationController
       session[:cart] = nil
       redirect_to addresses_order_checkout_path(@order)
     else
-      redirect_to :back
+      redirect_to cart_path
     end
   end
 
   private
 
-    def cart
-      Cart.new(session[:cart] ||= {})
-    end
+  def cart
+    Cart.new(session[:cart] ||= {})
+  end
 
-    def cart_params
-      params.require(:book).permit(:book_id, :quantity)
-    end
+  def cart_params
+    params.require(:book).permit(:book_id, :quantity)
+  end
 end
