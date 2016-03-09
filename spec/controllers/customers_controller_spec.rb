@@ -119,86 +119,88 @@ RSpec.describe CustomersController, type: :controller do
     end
   end
 
-  describe 'PATCH #update_billing' do
-    context 'when customer signed in' do
-      before do
-        sign_in customer
-        patch :update_billing, billing_address: attributes_for(:address)
+  describe 'PATCH #update_addresses' do
+    context 'with billing params' do
+      context 'when customer signed in' do
+        before do
+          sign_in customer
+          patch :update_addresses, billing_address: attributes_for(:address)
+        end
+
+        it 'with valid billing params redirect to edit customer' do
+          expect(response).to redirect_to(edit_customer_path)
+        end
+
+        it 'with valid billing params flash notice' do
+          expect(flash[:notice]).to eq('Billing address is updated')
+        end
+
+        it 'render :edit template when invalid params' do
+          patch :update_addresses, billing_address: attributes_for(:address, firstname: '')
+          expect(response).to render_template(:edit)
+        end
       end
 
-      it 'with valid billing params redirect to edit customer' do
-        expect(response).to redirect_to(edit_customer_path)
+      context 'when customer not signed in' do
+        it 'redirect to sign_in page' do
+          patch :update_addresses, billing_address: attributes_for(:address)
+          expect(response).to redirect_to(new_customer_session_path)
+        end
       end
 
-      it 'with valid billing params flash notice' do
-        expect(flash[:notice]).to eq('Billing address is updated')
-      end
+      context 'when customer not authorized' do
+        before do
+          setup_ability
+          sign_in customer
+          @ability.cannot :update_addresses, Customer
+          patch :update_addresses, billing_address: attributes_for(:address)
+        end
 
-      it 'render :edit template when invalid params' do
-        patch :update_billing, billing_address: attributes_for(:address, firstname: '')
-        expect(response).to render_template(:edit)
-      end
-    end
-
-    context 'when customer not signed in' do
-      it 'redirect to sign_in page' do
-        patch :update_billing, billing_address: attributes_for(:address)
-        expect(response).to redirect_to(new_customer_session_path)
-      end
-    end
-
-    context 'when customer not authorized' do
-      before do
-        setup_ability
-        sign_in customer
-        @ability.cannot :update_billing, Customer
-        patch :update_billing, billing_address: attributes_for(:address)
-      end
-
-      it 'redirect to root path' do
-        expect(response).to redirect_to(root_path)
-      end
-    end
-  end
-
-  describe 'PATCH #update_shipping' do
-    context 'when customer signed in' do
-      before do
-        sign_in customer
-        patch :update_shipping, shipping_address: attributes_for(:address)
-      end
-
-      it 'with valid shipping params redirect to edit customer' do
-        expect(response).to redirect_to(edit_customer_path)
-      end
-
-      it 'with valid shipping params flash notice' do
-        expect(flash[:notice]).to eq('Shipping address is updated')
-      end
-
-      it 'render :edit template when invalid params' do
-        patch :update_shipping, shipping_address: attributes_for(:address, firstname: '')
-        expect(response).to render_template(:edit)
+        it 'redirect to root path' do
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
 
-    context 'when customer not signed in' do
-      it 'redirect to sign_in page' do
-        patch :update_shipping, shipping_address: attributes_for(:address)
-        expect(response).to redirect_to(new_customer_session_path)
-      end
-    end
+    context 'with shipping params' do
+      context 'when customer signed in' do
+        before do
+          sign_in customer
+          patch :update_addresses, shipping_address: attributes_for(:address)
+        end
 
-    context 'when customer not authorized' do
-      before do
-        setup_ability
-        sign_in customer
-        @ability.cannot :update_shipping, Customer
-        patch :update_shipping, shipping_address: attributes_for(:address)
+        it 'with valid shipping params redirect to edit customer' do
+          expect(response).to redirect_to(edit_customer_path)
+        end
+
+        it 'with valid shipping params flash notice' do
+          expect(flash[:notice]).to eq('Shipping address is updated')
+        end
+
+        it 'render :edit template when invalid params' do
+          patch :update_addresses, shipping_address: attributes_for(:address, firstname: '')
+          expect(response).to render_template(:edit)
+        end
       end
 
-      it 'redirect to root path' do
-        expect(response).to redirect_to(root_path)
+      context 'when customer not signed in' do
+        it 'redirect to sign_in page' do
+          patch :update_addresses, shipping_address: attributes_for(:address)
+          expect(response).to redirect_to(new_customer_session_path)
+        end
+      end
+
+      context 'when customer not authorized' do
+        before do
+          setup_ability
+          sign_in customer
+          @ability.cannot :update_addresses, Customer
+          patch :update_addresses, shipping_address: attributes_for(:address)
+        end
+
+        it 'redirect to root path' do
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
   end

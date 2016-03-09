@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers, :controllers => { :omniauth_callbacks => "customers/omniauth_callbacks" }
   resource :customer, only: [:edit, :update] do
-    patch 'update_billing'
-    patch 'update_shipping'
+    patch 'update_addresses'
   end
 
   root 'books#bestsellers'

@@ -21,19 +21,12 @@ class CustomersController < ApplicationController
     end
   end
 
-  def update_billing
-    authorize! :update_billing, @customer
-    if @billing_address.update(billing_params)
+  def update_addresses
+    authorize! :update_addresses, @customer
+    if params[:billing_address] && @billing_address.update(billing_params)
       flash[:notice] = 'Billing address is updated'
       redirect_to edit_customer_path
-    else
-      render 'edit'
-    end
-  end
-
-  def update_shipping
-    authorize! :update_shipping, @customer
-    if @shipping_address.update(shipping_params)
+    elsif params[:shipping_address] && @shipping_address.update(shipping_params)
       flash[:notice] = 'Shipping address is updated'
       redirect_to edit_customer_path
     else

@@ -34,8 +34,7 @@ RSpec.describe Ability do
       it { expect(ability).not_to be_able_to(:new, Admin) }
       it { expect(ability).not_to be_able_to(:edit, Admin) }
       it { expect(ability).not_to be_able_to(:edit, Customer) }
-      it { expect(ability).not_to be_able_to(:update_billing, Customer) }
-      it { expect(ability).not_to be_able_to(:update_shipping, Customer) }
+      it { expect(ability).not_to be_able_to(:update_addresses, Customer) }
       it { expect(ability).not_to be_able_to(:new, Country) }
       it { expect(ability).not_to be_able_to(:edit, Country) }
       it { expect(ability).not_to be_able_to(:new, Delivery) }
@@ -60,8 +59,7 @@ RSpec.describe Ability do
       it { expect(ability).to be_able_to(:manage, Cart) }
       it { expect(ability).to be_able_to(:read, Order) }
       it { expect(ability).to be_able_to(:edit, Customer) }
-      it { expect(ability).to be_able_to(:update_billing, Customer) }
-      it { expect(ability).to be_able_to(:update_shipping, Customer) }
+      it { expect(ability).to be_able_to(:update_addresses, Customer) }
     end
 
     context 'cannot' do
