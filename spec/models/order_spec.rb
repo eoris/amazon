@@ -16,6 +16,30 @@ RSpec.describe Order, type: :model do
   it { is_expected.to validate_presence_of(:completed_date) }
   it { is_expected.to validate_presence_of(:state) }
 
+  describe 'aasm state' do
+    before(:each) {@order = Order.new}
+
+    it 'transitions from in_progress to in_queue' do
+      expect(@order).to transition_from(:in_progress).to(:in_queue).on_event(:in_queue)
+      expect(@order).not_to transition_from(:in_progress).to(:in_delivery).on_event(:in_queue)
+    end
+
+    it 'transitions from in_queue to in_delivery' do
+      expect(@order).to transition_from(:in_queue).to(:in_delivery).on_event(:in_delivery)
+      expect(@order).not_to transition_from(:in_queue).to(:delivered).on_event(:in_delivery)
+    end
+
+    it 'transitions from in_queue to canceled' do
+      expect(@order).to transition_from(:in_queue).to(:canceled).on_event(:canceled)
+      expect(@order).not_to transition_from(:in_queue).to(:delivered).on_event(:canceled)
+    end
+
+    it 'transitions from in_delivery to canceled' do
+      expect(@order).to transition_from(:in_delivery).to(:canceled).on_event(:canceled)
+      expect(@order).not_to transition_from(:in_delivery).to(:delivered).on_event(:canceled)
+    end
+  end
+
   context '.state_enum' do
     it 'return state, except in_progress' do
       order = create(:order)
