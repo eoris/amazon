@@ -25,12 +25,21 @@ RSpec.describe BooksController, type: :controller do
     it "assigns book" do
       expect(assigns(:book)).not_to be_nil
     end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
   end
 
   context "GET #bestsellers" do
+    before { get :bestsellers }
+
     it 'render :bestsellers template' do
-      get :bestsellers
       expect(response).to render_template(:bestsellers)
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
     end
   end
 end
