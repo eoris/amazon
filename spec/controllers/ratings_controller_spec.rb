@@ -21,6 +21,22 @@ RSpec.describe RatingsController, type: :controller do
       end
     end
 
+    context 'when customer already left a review' do
+      before do
+        create(:rating, book_id: book.id, customer_id: customer.id)
+        sign_in customer
+        get :new, book_id: book.id
+      end
+
+      it 'redirect to book path' do
+        expect(response).to redirect_to(book_path(book.id))
+      end
+
+      it 'flash notice' do
+        expect(flash[:error]).to eq('You have already left a review')
+      end
+    end
+
     context 'when customer not sign in' do
       it 'redirect to sign_in page' do
         get :new, book_id: book.id
@@ -56,6 +72,11 @@ RSpec.describe RatingsController, type: :controller do
       it 'redirect to book path if params is valid' do
         post :create, book_id: book.id, rating: attributes_for(:rating)
         expect(response).to redirect_to(book_path(book.id))
+      end
+
+      it 'sends success notice' do
+        post :create, book_id: book.id, rating: attributes_for(:rating)
+        expect(flash[:notice]).to eq('Thank you for your review')
       end
 
       it 'render :new with invalid params' do

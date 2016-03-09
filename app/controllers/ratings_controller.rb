@@ -5,7 +5,7 @@ class RatingsController < ApplicationController
   load_and_authorize_resource param_method: :rating_params
 
   def new
-    if @book.ratings.find_by_customer_id(current_customer.id)
+    if @book.ratings.find_by(customer_id: current_customer.id)
       flash[:error] = 'You have already left a review'
       redirect_to @book
     end
