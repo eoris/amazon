@@ -4,9 +4,11 @@ class CustomersController < ApplicationController
   before_action :addresses_init
 
   def edit
+    authorize! :edit, @customer
   end
 
   def update
+    authorize! :update, @customer
     if params[:customer] && @customer.update(customer_params)
       flash[:notice] = 'Your personal data updated'
       redirect_to edit_customer_path
@@ -20,6 +22,7 @@ class CustomersController < ApplicationController
   end
 
   def update_billing
+    authorize! :update_billing, @customer
     if @billing_address.update(billing_params)
       flash[:notice] = 'Billing address is updated'
       redirect_to edit_customer_path
@@ -29,6 +32,7 @@ class CustomersController < ApplicationController
   end
 
   def update_shipping
+    authorize! :update_shipping, @customer
     if @shipping_address.update(shipping_params)
       flash[:notice] = 'Shipping address is updated'
       redirect_to edit_customer_path

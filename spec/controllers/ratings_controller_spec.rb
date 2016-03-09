@@ -5,7 +5,7 @@ RSpec.describe RatingsController, type: :controller do
   let(:book) { create(:book) }
 
   describe 'GET #new' do
-    context 'when customer sign in' do
+    context 'when customer signed in' do
       before do
         sign_in customer
         get :new, book_id: book.id
@@ -37,7 +37,7 @@ RSpec.describe RatingsController, type: :controller do
       end
     end
 
-    context 'when customer not sign in' do
+    context 'when customer not signed in' do
       it 'redirect to sign_in page' do
         get :new, book_id: book.id
         expect(response).to redirect_to(new_customer_session_path)
@@ -59,14 +59,14 @@ RSpec.describe RatingsController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'when customer not sign in' do
+    context 'when customer not signed in' do
       it 'redirect to sign_in page' do
         post :create, book_id: book.id, rating: attributes_for(:rating)
         expect(response).to redirect_to(new_customer_session_path)
       end
     end
 
-    context 'when customer sign in' do
+    context 'when customer signed in' do
       before { sign_in customer }
 
       it 'redirect to book path if params is valid' do
