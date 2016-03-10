@@ -1,14 +1,12 @@
 class CheckoutsController < ApplicationController
   before_action :authenticate_customer!
+  load_and_authorize_resource :order
   before_action :set_customer
-  before_action :find_order
   before_action :order_state_check, except: [:show]
   before_action :addresses_init, only: [:addresses, :update_addresses]
   before_action :find_or_init_credit_card, only: [:payment, :update_payment]
-  before_action :authorize_checkout
 
   def addresses
-    redirect_to root_path if @order.nil?
   end
 
   def update_addresses
@@ -66,14 +64,6 @@ class CheckoutsController < ApplicationController
 
   private
 
-  def authorize_checkout
-    authorize! :checkout, @order
-  end
-
-  def find_order
-    @order = Order.find(params[:order_id])
-  end
-
   def find_or_init_credit_card
     @credit_card = CreditCard.find_or_initialize_by(order_id: @order.id)
   end
@@ -84,7 +74,7 @@ class CheckoutsController < ApplicationController
 
   def addresses_init
     @countries = Country.all
-    if @order.shipping_address.nil? && @order.billing_address.nil?
+    if @order.shipping_address.nil? || @order.billing_address.nil?
       @billing_address = BillingAddress.build_order_address(@customer, @order)
       @shipping_address = ShippingAddress.build_order_address(@customer, @order)
     else

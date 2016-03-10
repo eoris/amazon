@@ -2,7 +2,7 @@ class Customer < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockabley, :timeoutable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
   has_many :orders
   has_many :ratings

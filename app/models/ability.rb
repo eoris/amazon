@@ -10,7 +10,7 @@ class Ability
     can :manage, Cart
     if user.id
       can [:new, :create], Rating, customer_id: user.id
-      can [:read, :checkout], Order, customer_id: user.id
+      can [:read], Order, customer_id: user.id
       can [:edit, :update, :update_addresses], Customer, id: user.id
     end
   end
