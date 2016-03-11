@@ -8,7 +8,6 @@ FactoryGirl.define do
     country_id{ Faker::Number.between(1, 251) }
     phone     { Faker::PhoneNumber.phone_number }
     type      'ShippingAddress'
-    customer
   end
 
 end

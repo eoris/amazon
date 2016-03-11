@@ -26,11 +26,8 @@ class CheckoutsController < ApplicationController
   end
 
   def update_delivery
-    if @order.update(delivery_params)
-      redirect_to payment_order_checkout_path
-    else
-      render 'delivery'
-    end
+    @order.update(delivery_params)
+    redirect_to payment_order_checkout_path
   end
 
   def payment
