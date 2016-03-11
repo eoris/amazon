@@ -65,9 +65,8 @@ RSpec.describe Cart, type: :model do
       it 'sum hash if add same book' do
         @cart.add_item_to_cart({book_id: 1, quantity: 1})
         @cart.add_item_to_cart({book_id: 1, quantity: 3})
-        @cart.add_item_to_cart({book_id: 2, quantity: 3})
 
-        expect(@cart.session).to eq({1 => 4, 2 => 3})
+        expect(@cart.session).to eq({1 => 4})
       end
     end
   end

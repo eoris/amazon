@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RatingsController, type: :controller do
+  before { setup_ability }
   let(:customer) { create(:customer) }
   let(:book) { create(:book) }
 
@@ -23,8 +24,13 @@ RSpec.describe RatingsController, type: :controller do
 
     context 'when customer already left a review' do
       before do
-        create(:rating, book_id: book.id, customer_id: customer.id)
         sign_in customer
+        ratings = double(:ratings)
+        rating = double(:rating)
+        allow_any_instance_of(Book).to receive(:ratings).and_return(ratings)
+        allow(ratings).to receive(:find_by).and_return(true)
+        allow(ratings).to receive(:new).and_return(rating)
+        allow(rating).to receive(:customer_id).with(customer.id)
         get :new, book_id: book.id
       end
 
@@ -46,7 +52,6 @@ RSpec.describe RatingsController, type: :controller do
 
     context 'when customer not authorized' do
       before do
-        setup_ability
         sign_in customer
         @ability.cannot :new, Rating
       end
@@ -92,15 +97,12 @@ RSpec.describe RatingsController, type: :controller do
 
     context 'when customer not authorized' do
       before do
-        setup_ability
         sign_in customer
         @ability.cannot :create, Rating
+        post :create, book_id: book.id, rating: attributes_for(:rating)
       end
 
-      it 'redirect to root' do
-        post :create, book_id: book.id, rating: attributes_for(:rating)
-        expect(response).to redirect_to(root_path)
-      end
+      it { is_expected.to redirect_to(root_path) }
     end
   end
 end

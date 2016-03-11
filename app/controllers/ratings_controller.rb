@@ -2,7 +2,6 @@ class RatingsController < ApplicationController
   before_action :authenticate_customer!
   load_and_authorize_resource :book
   load_and_authorize_resource :rating, :through => :book
-  load_and_authorize_resource param_method: :rating_params
 
   def new
     if @book.ratings.find_by(customer_id: current_customer.id)
