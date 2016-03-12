@@ -21,9 +21,9 @@
                 %dt= order_item_book(book_id).title
                 %dd= truncate(order_item_book(book_id).description, length: 250)
             %td.text-center= number_to_currency order_item_book(book_id).price
-            %td.text-center= qty
+            %td.text-center{id: "qty_#{book_id}"}= qty
             %td.text-center= number_to_currency order_item_price(qty, book_id)
-            %td.text-center= link_to('×', remove_item_cart_path(item_id: book_id), method: :delete, class: 'close')
+            %td.text-center= link_to('×', remove_item_cart_path(item_id: book_id), method: :delete, class: 'close', id: book_id)
       - unless @cart.empty?
         %p.text-right
           %strong= t('cart.subtotal') + " #{number_to_currency @subtotal}"
