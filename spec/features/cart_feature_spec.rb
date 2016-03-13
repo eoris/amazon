@@ -23,7 +23,7 @@ RSpec.describe "Cart", type: :feature do
     click_button I18n.t('books.add_to_cart')
     expect(page).not_to have_content I18n.t('cart.your_cart_empty')
     expect(page).to have_content book1.title
-    expect(find("#qty_#{book1.id}")).to have_content(2)
+    expect(page).to have_field(book1.id, with: '2')
   end
 
   scenario "when customer remove book from cart" do
