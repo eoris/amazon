@@ -23,6 +23,17 @@ class Cart
     end
   end
 
+  def update_cart(params)
+    @session.each { |k, v| @session[k] = params[k].to_i if params[k].to_i.between?(1, 9) }
+    coupon(params[:coupon])
+  end
+
+  def coupon(params)
+    # @coupon = Coupon.find_by("code = ?", params)
+    @coupon = Coupon.find_by_code(params)
+    @discount = @coupon.discount
+  end
+
   def build_order_items_from_cart
     return if @session.empty?
     order_items = []

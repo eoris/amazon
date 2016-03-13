@@ -7,6 +7,11 @@ class CartsController < ApplicationController
     @subtotal = cart.subtotal
   end
 
+  def update
+    cart.update_cart(params)
+    redirect_to cart_path
+  end
+
   def add_item
     cart.add_item_to_cart(cart_params)
     redirect_to cart_path

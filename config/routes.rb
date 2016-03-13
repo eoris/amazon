@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :authors, only: [:show]
 
-  resource :cart, only: [:show] do
+  resource :cart, only: [:show, :update] do
     post    'add_item'
     delete  'remove_item'
     post    'checkout'
