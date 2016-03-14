@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe Cart, type: :model do
   describe '.initialize' do
     it 'init new cart' do
-      cart = Cart.new(1)
+      cart = Cart.new(1, 1)
 
       expect(cart.session).to eq(1)
+      expect(cart.discount).to eq(1)
     end
   end
 
@@ -20,9 +21,9 @@ RSpec.describe Cart, type: :model do
 
   describe '.params_valid?' do
     context 'check for valid params' do
-      before(:each) do
+      before do
         create(:book)
-        @cart = Cart.new(1)
+        @cart = Cart.new({})
       end
 
       it 'return true if params valid' do
@@ -47,7 +48,7 @@ RSpec.describe Cart, type: :model do
 
   describe '.add_item_to_cart' do
     context 'add item to cart session hash' do
-      before(:each) do
+      before do
         create(:book)
         @cart = Cart.new({})
       end
@@ -71,6 +72,38 @@ RSpec.describe Cart, type: :model do
     end
   end
 
+  describe '.update_cart' do
+    context 'update quantity of books in session hash, and apply discount' do
+      let(:cart) { Cart.new({'1' => 1, '2' => 2}) }
+
+      it 'update quantity' do
+        cart.update_cart({'1' => 7, '2' => 9})
+
+        expect(cart.session).to eq({'1' => 7, '2' => 9})
+      end
+
+      it 'add discount' do
+        coupon = create(:coupon, code: '1111', discount: 0.5)
+
+        expect(cart.update_cart({'1' => '7', '2' => '9', coupon: "1111"})).to eq(0.5)
+      end
+    end
+  end
+
+  describe '.coupon_discount' do
+    let (:cart) { Cart.new('1' => 1) }
+
+    it 'return discount if coupon exist' do
+      coupon = create(:coupon, code: '1111', discount: 0.8)
+
+      expect(cart.coupon_discount('1111')).to eq(0.8)
+    end
+
+    it 'return nil if no coupon find' do
+      expect(cart.coupon_discount('')).to be_nil
+    end
+  end
+
   describe '.build_order_items_from_cart' do
     it 'return nil if cart session empty' do
       cart = Cart.new({})
@@ -78,7 +111,7 @@ RSpec.describe Cart, type: :model do
       expect(cart.build_order_items_from_cart).to be_nil
     end
 
-    before(:each) do
+    before do
       @book1 = create(:book)
       @book2 = create(:book)
       @book3 = create(:book)
@@ -109,7 +142,7 @@ RSpec.describe Cart, type: :model do
       expect(cart.build_order(Customer.new)).to be_nil
     end
 
-    before(:each) do
+    before do
       @book1 = create(:book, price: 3)
       @book2 = create(:book, price: 4)
       @book3 = create(:book, price: 5)

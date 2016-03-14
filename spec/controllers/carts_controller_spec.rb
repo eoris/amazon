@@ -23,6 +23,15 @@ RSpec.describe CartsController, type: :controller do
     end
   end
 
+  context "PATCH #update" do
+    before { patch :update }
+
+    it 'redirect to cart path' do
+      expect(response).to redirect_to(cart_path)
+      expect(response).to have_http_status(:found)
+    end
+  end
+
   context "POST #add_item" do
     before { post :add_item, book: {book_id: book.id, quantity: 1} }
 
@@ -72,6 +81,7 @@ RSpec.describe CartsController, type: :controller do
 
       it 'redirect to checkout' do
         expect(session[:cart]).to be_nil
+        expect(session[:discount]).to be_nil
         expect(response).to redirect_to(addresses_order_checkout_path(order))
       end
 

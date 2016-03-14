@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :coupon do
-    code ""
-discount 1.5
+    code "1111"
+    discount 0.5
   end
 
 end
