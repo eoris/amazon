@@ -65,7 +65,7 @@ en:
     checkout: 'CHECKOUT'
     empty_cart: 'EMPTY CART'
     continue_shoping: 'CONTINUE SHOPING'
-    coupon_code: 'Coupon code'
+    coupon_code: 'coupon code'
     your_cart_empty: 'Your shopping cart is empty'
   settings:
     customer: "Edit Personal Data"

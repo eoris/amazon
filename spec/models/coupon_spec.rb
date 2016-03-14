@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Coupon, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it { is_expected.to have_db_column(:code) }
+  it { is_expected.to have_db_column(:discount) }
+
+  it { is_expected.to validate_uniqueness_of(:code) }
+
 end

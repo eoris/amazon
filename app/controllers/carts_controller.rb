@@ -8,7 +8,7 @@ class CartsController < ApplicationController
   end
 
   def update
-    cart.update_cart(params)
+    session[:discount] = cart.update_cart(params)
     redirect_to cart_path
   end
 
@@ -23,14 +23,14 @@ class CartsController < ApplicationController
   end
 
   def clear
-    session[:cart] = nil
+    clear_session
     redirect_to cart_path
   end
 
   def checkout
     @order = cart.build_order(current_customer)
     if !cart.session.empty? && @order.save
-      session[:cart] = nil
+      clear_session
       redirect_to addresses_order_checkout_path(@order)
     else
       redirect_to cart_path
@@ -39,8 +39,13 @@ class CartsController < ApplicationController
 
   private
 
+  def clear_session
+    session[:cart] = nil
+    session[:discount] = nil
+  end
+
   def cart
-    Cart.new(session[:cart] ||= {})
+    Cart.new(session[:cart] ||= {}, session[:discount] ||= 1)
   end
 
   def cart_params

@@ -1,8 +1,9 @@
 class Cart
   attr_accessor :session
 
-  def initialize(session)
+  def initialize(session, discount)
     @session = session
+    @discount = discount
   end
 
   def remove_item_from_cart(item_id)
@@ -25,13 +26,12 @@ class Cart
 
   def update_cart(params)
     @session.each { |k, v| @session[k] = params[k].to_i if params[k].to_i.between?(1, 9) }
-    coupon(params[:coupon])
+    coupon_discount(params[:coupon])
   end
 
-  def coupon(params)
-    # @coupon = Coupon.find_by("code = ?", params)
-    @coupon = Coupon.find_by_code(params)
-    @discount = @coupon.discount
+  def coupon_discount(params)
+    coupon = Coupon.find_by_code(params)
+    discount = coupon.discount unless coupon.blank?
   end
 
   def build_order_items_from_cart
@@ -58,6 +58,6 @@ class Cart
     @session.each_pair do |key, value|
       @subtotal += Book.find(key).price * value
     end
-    @subtotal
+    @discount ? @subtotal * @discount : @subtotal
   end
 end
