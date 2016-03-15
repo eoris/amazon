@@ -6,6 +6,12 @@ RSpec.describe "Sign In", type: :feature do
 
   scenario "Customer sign in successfully via sign in form if registered" do
     visit new_customer_session_path
+
+    expect(page).to have_content I18n.t('devise.sessions.new.sign_in')
+    expect(page).to have_content 'Sign in with Facebook'
+    expect(page).to have_content I18n.t('header.sign_in')
+    expect(page).to have_content I18n.t('header.sign_up')
+
     within("#new_customer") do
       fill_in 'Email', with: customer.email
       fill_in 'Password', with: customer.password

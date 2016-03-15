@@ -82,7 +82,7 @@ en:
   checkout:
     checkout: 'CHECKOUT'
     address: 'ADDRESS'
-    delivery: 'delivery'
+    delivery: 'Delivery'
     payment: 'payment'
     confirm: 'CONFIRM'
     complete: 'COMPLETE'

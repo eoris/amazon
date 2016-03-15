@@ -14,7 +14,7 @@
               = ba.input :city
               = ba.input :country_id, collection: @countries
               = ba.input :zipcode
-              = ba.input :phone
+              = ba.input :phone, as: 'tel'
       .col-md-4
         .panel.panel-default.shipping
           .panel-heading
@@ -30,7 +30,7 @@
               = sa.input :city
               = sa.input :country_id, collection: @countries
               = sa.input :zipcode
-              = sa.input :phone
+              = sa.input :phone, as: 'tel'
       .col-md-4
         .panel.panel-default.shipping
           .panel-heading
