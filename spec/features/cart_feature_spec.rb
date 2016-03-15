@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Cart", type: :feature do
 
-  let(:book1) { create(:book) }
+  let(:book1) { create(:book, price: 10) }
   let(:book2) { create(:book) }
 
   scenario "when cart is empty" do
@@ -26,7 +26,7 @@ RSpec.describe "Cart", type: :feature do
     expect(page).to have_field(book1.id, with: '2')
   end
 
-  scenario "when customer remove book from cart" do
+  scenario "customer remove book from cart" do
     visit book_path(book1)
     click_button I18n.t('books.add_to_cart')
     visit book_path(book2)
@@ -36,7 +36,16 @@ RSpec.describe "Cart", type: :feature do
     expect(page).not_to have_content book2.title
   end
 
-  scenario "when customer empty cart with several books" do
+  scenario "customer apply coupon code" do
+    create(:coupon, code: '1234', discount: 0.5)
+    visit book_path(book1)
+    click_button I18n.t('books.add_to_cart')
+    fill_in 'coupon', with: 1234
+    click_button I18n.t('cart.update')
+    expect(page).to have_content('SUBTOTAL: $5.00')
+  end
+
+  scenario "customer empty cart with several books" do
     visit book_path(book1)
     click_button I18n.t('books.add_to_cart')
     visit book_path(book2)
@@ -46,4 +55,5 @@ RSpec.describe "Cart", type: :feature do
     expect(page).not_to have_content book1.title
     expect(page).not_to have_content book2.title
   end
+
 end

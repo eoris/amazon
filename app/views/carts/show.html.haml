@@ -27,7 +27,7 @@
               %td.text-center.cart_remove= link_to('×', remove_item_cart_path(item_id: book_id), method: :delete, class: 'close', id: book_id)
         - unless @cart.empty?
           %p.text-right
-            %strong= t('cart.subtotal') + " #{number_to_currency @subtotal}"
+            %strong.subtotal= t('cart.subtotal') + " #{number_to_currency @subtotal}"
           .col-md-4
             = link_to t('cart.empty_cart'), clear_cart_path, method: :delete, class: 'btn btn-danger'
             = link_to t('cart.continue_shoping'), books_path, class: 'btn btn-default'

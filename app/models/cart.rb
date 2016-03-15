@@ -26,7 +26,7 @@ class Cart
   end
 
   def update_cart(params)
-    @session.each { |k, v| @session[k] = params[k].to_i if params[k].to_i.between?(1, 9) }
+    @session.each_key { |k| @session[k] = params[k].to_i if params[k].to_i.between?(1, 9) }
     coupon_discount(params[:coupon])
   end
 

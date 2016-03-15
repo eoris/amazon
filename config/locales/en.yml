@@ -87,7 +87,7 @@ en:
     confirm: 'CONFIRM'
     complete: 'COMPLETE'
     billing_address: 'Billing Address'
-    shippin_address: 'Shipping Address'
+    shipping_address: 'Shipping Address'
     order_summary: 'Order Summary'
     item_total: 'ITEM TOTAL:'
     order_total: 'ORDER TOTAL:'
