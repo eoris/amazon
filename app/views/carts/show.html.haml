@@ -34,7 +34,7 @@
           .col-md-6
             .form-inline.text-right
               .form-group
-                = text_field_tag :coupon, nil, {class: 'form-control', id: 'coupon', placeholder: t('cart.coupon_code')}
+                = text_field_tag :coupon, nil, {class: 'form-control', id: 'coupon', placeholder: t('cart.coupon_code') + ' (1111 -20%)'}
               .form-group
                 = submit_tag t('cart.update'), class: 'btn btn-primary btn-block'
           .col-md-2.text-right
