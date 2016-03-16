@@ -26,8 +26,10 @@ class CheckoutsController < ApplicationController
   end
 
   def update_delivery
-    @order.update(delivery_params)
-    redirect_to payment_order_checkout_path
+    if @delivery = Delivery.find(delivery_params[:delivery_id])
+      @order.update(delivery_params)
+      redirect_to payment_order_checkout_path
+    end
   end
 
   def payment
@@ -93,7 +95,7 @@ class CheckoutsController < ApplicationController
   end
 
   def delivery_params
-    params.require(:order).permit(:delivery_id)
+    params.fetch(:order, {}).permit(:delivery_id)
   end
 
   def payment_params

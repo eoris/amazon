@@ -4,6 +4,7 @@ RSpec.describe CheckoutsController, type: :controller do
   before { setup_ability }
   let(:customer) { create(:customer) }
   let(:order)    { create(:order, state: 'in_progress', customer_id: customer.id) }
+  let(:delivery) { create(:delivery) }
 
   it { is_expected.to use_before_action(:authenticate_customer!) }
   it { is_expected.to use_before_action(:set_customer) }
@@ -161,7 +162,7 @@ RSpec.describe CheckoutsController, type: :controller do
     context "when customer signed in" do
       before do
         sign_in customer
-        patch :update_delivery, order_id: order.id, order: attributes_for(:delivery)
+        patch :update_delivery, order_id: order.id, order: {delivery_id: delivery.id}
       end
 
       it { is_expected.to redirect_to(payment_order_checkout_path) }
