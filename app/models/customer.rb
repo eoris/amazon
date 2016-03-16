@@ -6,7 +6,6 @@ class Customer < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   has_many :orders
   has_many :ratings
-  has_many :addresses
   has_many :credit_cards
   has_one  :shipping_address
   has_one  :billing_address

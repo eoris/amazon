@@ -32,7 +32,7 @@ class Cart
 
   def coupon_discount(params)
     coupon = Coupon.find_by_code(params)
-    discount = coupon.discount unless coupon.blank?
+    coupon.discount unless coupon.blank?
   end
 
   def build_order_items_from_cart
