@@ -26,7 +26,7 @@ class CheckoutsController < ApplicationController
   end
 
   def update_delivery
-    if @delivery = Delivery.find(delivery_params[:delivery_id])
+    if Delivery.find(delivery_params[:delivery_id])
       @order.update(delivery_params)
       redirect_to payment_order_checkout_path
     end
