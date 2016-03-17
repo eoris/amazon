@@ -35,7 +35,7 @@ RSpec.configure do |config|
   config.before :suite do
     Warden.test_mode!
   end
-  config.after :each do
+  config.after(:each, type: :feature) do
     Warden.test_reset!
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
