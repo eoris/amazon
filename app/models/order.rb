@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
     state :delivered
     state :canceled
 
-    event :place, after: :place_order do
+    event :place, before: :place_order do
       transitions from: :in_progress, to: :in_queue
     end
 
@@ -38,7 +38,9 @@ class Order < ActiveRecord::Base
   end
 
   def place_order
-    self.completed_date = Time.now
-    self.total_price += self.delivery.price
+    if self.total_price && self.delivery.price
+      self.completed_date = Time.now
+      self.total_price += self.delivery.price
+    end
   end
 end
