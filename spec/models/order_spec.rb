@@ -20,23 +20,24 @@ RSpec.describe Order, type: :model do
     before(:each) {@order = Order.new}
 
     it 'transitions from in_progress to in_queue' do
-      expect(@order).to transition_from(:in_progress).to(:in_queue).on_event(:in_queue)
-      expect(@order).not_to transition_from(:in_progress).to(:in_delivery).on_event(:in_queue)
+      allow_any_instance_of(Order).to receive(:place_order).and_return(true)
+      expect(@order).to transition_from(:in_progress).to(:in_queue).on_event(:place)
+      expect(@order).not_to transition_from(:in_progress).to(:in_delivery).on_event(:place)
     end
 
     it 'transitions from in_queue to in_delivery' do
-      expect(@order).to transition_from(:in_queue).to(:in_delivery).on_event(:in_delivery)
-      expect(@order).not_to transition_from(:in_queue).to(:delivered).on_event(:in_delivery)
+      expect(@order).to transition_from(:in_queue).to(:in_delivery).on_event(:processed)
+      expect(@order).not_to transition_from(:in_queue).to(:delivered).on_event(:processed)
     end
 
     it 'transitions from in_queue to canceled' do
-      expect(@order).to transition_from(:in_queue).to(:canceled).on_event(:canceled)
-      expect(@order).not_to transition_from(:in_queue).to(:delivered).on_event(:canceled)
+      expect(@order).to transition_from(:in_queue).to(:canceled).on_event(:cancel)
+      expect(@order).not_to transition_from(:in_queue).to(:delivered).on_event(:cancel)
     end
 
     it 'transitions from in_delivery to canceled' do
-      expect(@order).to transition_from(:in_delivery).to(:canceled).on_event(:canceled)
-      expect(@order).not_to transition_from(:in_delivery).to(:delivered).on_event(:canceled)
+      expect(@order).to transition_from(:in_delivery).to(:canceled).on_event(:cancel)
+      expect(@order).not_to transition_from(:in_delivery).to(:delivered).on_event(:cancel)
     end
   end
 
@@ -47,22 +48,19 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  context '#build_state_date_price' do
+  context '#place_order' do
     before(:each) do
       @delivery = create(:delivery, price: 7)
-      @order = create(:order, total_price: 10, state: 'in_progress', delivery_id: @delivery.id)
-    end
-
-    it 'build order with state, date and price' do
-      expect(Order.build_state_date_price(@order).state).to eq('in_queue')
+      @order = build(:order, total_price: 10, delivery_id: @delivery.id)
+      @order.place_order
     end
 
     it 'build order completed date' do
-      expect(Order.build_state_date_price(@order).completed_date.strftime('%Y-%m-%d')).to eq(Time.now.strftime('%Y-%m-%d'))
+      expect(@order.completed_date.strftime('%Y-%m-%d')).to eq(Time.now.strftime('%Y-%m-%d'))
     end
 
     it 'build order total price' do
-      expect(Order.build_state_date_price(@order).total_price).to eq(17)
+      expect(@order.total_price).to eq(17)
     end
   end
 end

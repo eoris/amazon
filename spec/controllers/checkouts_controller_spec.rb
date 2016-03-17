@@ -345,8 +345,7 @@ RSpec.describe CheckoutsController, type: :controller do
     context "when customer signed in" do
       before do
         sign_in customer
-        allow(Order).to receive(:build_state_date_price).and_return(true)
-        allow_any_instance_of(Order).to receive(:save).and_return(true)
+        allow_any_instance_of(Order).to receive(:place!).and_return(true)
         post :place, order_id: order.id
       end
 
@@ -357,8 +356,7 @@ RSpec.describe CheckoutsController, type: :controller do
     context "when order not saved" do
       before do
         sign_in customer
-        allow(Order).to receive(:build_state_date_price).and_return(true)
-        allow_any_instance_of(Order).to receive(:save).and_return(false)
+        allow_any_instance_of(Order).to receive(:place!).and_return(false)
         post :place, order_id: order.id
       end
 

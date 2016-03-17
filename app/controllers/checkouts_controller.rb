@@ -49,8 +49,7 @@ class CheckoutsController < ApplicationController
   end
 
   def place
-    Order.build_state_date_price(@order)
-    if @order.save
+    if @order.place!
       redirect_to order_checkout_path
     else
       render 'confirm'

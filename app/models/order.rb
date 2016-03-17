@@ -16,11 +16,11 @@ class Order < ActiveRecord::Base
     state :delivered
     state :canceled
 
-    event :in_queue do
+    event :place, after: :place_order do
       transitions from: :in_progress, to: :in_queue
     end
 
-    event :in_delivery do
+    event :processed do
       transitions from: :in_queue, to: :in_delivery
     end
 
@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
       transitions from: :in_delivery, to: :delivered
     end
 
-    event :canceled do
+    event :cancel do
       transitions from: [:in_queue, :in_delivery], to: :canceled
     end
   end
@@ -37,10 +37,8 @@ class Order < ActiveRecord::Base
     ['in_queue', 'in_delivery', 'delivered', 'canceled']
   end
 
-  def self.build_state_date_price(order)
-    order.in_queue
-    order.completed_date = Time.now
-    order.total_price += order.delivery.price
-    order
+  def place_order
+    self.completed_date = Time.now
+    self.total_price += self.delivery.price
   end
 end
