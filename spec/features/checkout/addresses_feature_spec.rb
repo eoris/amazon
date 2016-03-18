@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "addresses", type: :feature, js: true do
 
   let(:customer) { create(:customer) }
-  let(:order) { create(:order, customer_id: customer.id, state: 'in_progress') }
+  let(:order) { create(:order, customer: customer, state: 'in_progress') }
 
   context 'customer not signed in' do
     scenario 'checkout addresses' do
