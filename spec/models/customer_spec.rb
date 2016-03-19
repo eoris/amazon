@@ -33,4 +33,22 @@ RSpec.describe Customer, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
+context "#from_omniauth" do
+  it "creates a new customer if one doesn't already exist" do
+    expect(Customer.count).to eq(0)
+    Customer.from_omniauth(omniauth_mock)
+    expect(Customer.count).to eq(1)
+  end
+
+  it "retrieves an existing customer" do
+    customer = create(:customer, provider: 'facebook', uid: '12345')
+    oauth_hash = OmniAuth.config.add_mock(:facebook, {provider: 'facebook', uid: '12345', info: {
+                                                      email: customer.email,
+                                                      first_name: customer.firstname,
+                                                      last_name: customer.lastname,
+                                                      password: customer.password}})
+    expect(customer).to eq(Customer.from_omniauth(oauth_hash))
+  end
+end
+
 end
