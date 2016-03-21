@@ -10,7 +10,8 @@ class CheckoutsController < ApplicationController
   end
 
   def update_addresses
-    if @billing_address.update(billing_params) && @shipping_address.update(shipping_params)
+    _shipping_params = params[:shipping_as_billing] ? billing_params : shipping_params
+    if @billing_address.update(billing_params) && @shipping_address.update(_shipping_params)
       redirect_to delivery_order_checkout_path
     else
       render 'addresses'

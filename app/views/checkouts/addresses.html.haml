@@ -20,9 +20,9 @@
           .panel-heading
             %h4
               = t('checkout.shipping_address', :default => "Shipping Address")
-              = check_box("billing_to", "shipping", { id: 'shipping-checkbox' })
+              = check_box_tag 'shipping_as_billing', true, false, id: 'shipping-checkbox'
               %em.small Use Billing Address
-          .panel-body
+          .panel-body.shipping-input
             = simple_fields_for @shipping_address do |sa|
               = sa.input :firstname
               = sa.input :lastname
